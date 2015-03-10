@@ -1,25 +1,26 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org</groupId>
+
+	<groupId>com.my</groupId>
 	<artifactId>my</artifactId>
-	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>my Maven Webapp</name>
+	<packaging>pom</packaging>
+
+	<name>my</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<junit.version>4.11</junit.version>
+		<jdk.version>1.6</jdk.version>
 		<spring.version>4.1.4.RELEASE</spring.version>
 		<spring.security.version>3.2.5.RELEASE</spring.security.version>
 		<mysql.version>5.1.30</mysql.version>
+		<jackson.version>2.4.2</jackson.version>
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
 		<!-- spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -55,12 +56,12 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
-			<version>2.4.2</version>
+			<version>${jackson.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.4.2</version>
+			<version>${jackson.version}</version>
 		</dependency>
 		<!-- google -->
 		<dependency>
@@ -90,8 +91,31 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<build>
-		<finalName>my</finalName>
+		<plugins>
+			<!-- 指定JDK的编译版本 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<showWarnings>true</showWarnings>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
+	<modules>
+    <module>my-core</module>
+    <module>my-service</module>
+    <module>my-app</module>
+  </modules>
 </project>
