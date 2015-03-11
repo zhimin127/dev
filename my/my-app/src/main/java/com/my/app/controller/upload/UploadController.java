@@ -1,4 +1,4 @@
-package com.my.app.controller;
+package com.my.app.controller.upload;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
-<title>home</title>
+<title>welcom my</title>
 <link href="//g.alicdn.com/kissy/k/1.4.7/css/dpl/base-min.css" rel="stylesheet" />
 <link href="//g.alicdn.com/kissy/k/1.4.7/editor/theme/cool/editor-min.css?1" rel="stylesheet" />
 <!-- use seed-min in production-->
 <script src="//g.alicdn.com/kissy/k/1.4.7/seed.js" data-config="{combine:true}"></script>
+
 <script src="js/jquery-1.11.0.min.js" ></script>
 <body style="margin: 10px 10px;">
 	<h2>Hello World!</h2>
