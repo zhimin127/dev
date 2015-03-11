@@ -11,9 +11,9 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
+		<jdk.version>1.6</jdk.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.version>4.11</junit.version>
-		<jdk.version>1.6</jdk.version>
 		<spring.version>4.1.4.RELEASE</spring.version>
 		<spring.security.version>3.2.5.RELEASE</spring.security.version>
 		<mysql.version>5.1.30</mysql.version>
@@ -114,8 +114,8 @@
 		</plugins>
 	</build>
 	<modules>
-    <module>my-core</module>
-    <module>my-service</module>
-    <module>my-app</module>
-  </modules>
+		<module>my-core</module>
+		<module>my-service</module>
+		<module>my-app</module>
+	</modules>
 </project>
