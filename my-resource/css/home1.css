@@ -19,7 +19,7 @@ header{width:100%; height:auto; background:#FFF;padding:0px 0px; position:fixed;
 
 .big_circle .sub_heading span{color:#222;}
 
-.welcome_promo .small_circle{width:120px; height:70px; padding-top:50px; border-radius:50%;  -moz-border-radius:50%; -webkit-border-radius:50%; -o-border-radius:50%; -ms-border-radius:50%; background: #e1704b; position:absolute; color:#FFF; text-align:center; -webkit-transition: all 0.3s ease-in;-moz-transition:all 0.3s ease-in;-ms-transition:all 0.3s ease-in;-o-transition: all 0.3s ease-in;-transition: all 0.3s ease-in; overflow:hidden; font-size:16px;}
+.welcome_promo .small_circle{width:120px; height:70px; padding-top:25px; border-radius:50%;  -moz-border-radius:50%; -webkit-border-radius:50%; -o-border-radius:50%; -ms-border-radius:50%; background: #e1704b; position:absolute; color:#FFF; text-align:center; -webkit-transition: all 0.3s ease-in;-moz-transition:all 0.3s ease-in;-ms-transition:all 0.3s ease-in;-o-transition: all 0.3s ease-in;-transition: all 0.3s ease-in; overflow:hidden; font-size:16px;}
 
 .circle1.small_circle{top:300px; right:200px;}
 
