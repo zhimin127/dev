@@ -500,7 +500,7 @@
                     <div class="row">
                     	<div id="container" class="clearfix portfolio">
     
-                            <a class="gallery-block" href="/images/portfolio/full/dummy.jpg" data-gal="prettyPhoto[portfolio]">
+                            <a class="gallery-block" href="/images/portfolio/p01.jpg" data-gal="prettyPhoto[portfolio]">
                                 <div class="element web height-02 " data-symbol="Hg" data-category="web">
                                     <article class="gallery-caps">
                                         <h3>Title</h3>
@@ -508,10 +508,9 @@
                                     </article>
                                     <img alt="Skroll by designova" title="Skroll"  src="/images/portfolio/p01.jpg"/>
                                 </div>
-                                
                             </a>
                             
-                            <a class="gallery-block" href="/images/portfolio/full/dummy.jpg" data-gal="prettyPhoto[portfolio]">
+                            <a class="gallery-block" href="/images/portfolio/p02.jpg" data-gal="prettyPhoto[portfolio]">
                                 <div class="element branding height-01" data-symbol="Te" data-category="branding ">
                                     <article class="gallery-caps">
                                         <h3>Title</h3>
@@ -520,10 +519,8 @@
                                     <img alt="Skroll by designova" title="Skroll"   src="/images/portfolio/p02.jpg"/>
                                 </div>
                             </a>
-                            
-                            
                               
-                            <a class="gallery-block" href="/images/portfolio/full/dummy.jpg" data-gal="prettyPhoto[portfolio]">
+                            <a class="gallery-block" href="/images/portfolio/p03.jpg" data-gal="prettyPhoto[portfolio]">
                                 <div class="element ecommerce height-03" data-symbol="Bi" data-category="ecommerce">
                                     <article class="gallery-caps">
                                         <h3>Title</h3>
@@ -532,8 +529,6 @@
                                     <img alt="Skroll by designova" title="Skroll"   src="/images/portfolio/p03.jpg"/>
                                 </div>
                             </a>
-                            
-                            
                             
                             <a class="gallery-block" href="/images/portfolio/full/dummy.jpg" data-gal="prettyPhoto[portfolio]">
                                 <div class="element creative height-01" data-symbol="Ca" data-category="creative">
@@ -545,8 +540,6 @@
                                 </div>
                             </a>
                             
-                            
-                            
                             <a class="gallery-block" href="/images/portfolio/full/dummy.jpg" data-gal="prettyPhoto[portfolio]">
                                 <div class="element web  height-02 " data-symbol="Cd" data-category="web">
                                     <article class="gallery-caps">
@@ -556,7 +549,6 @@
                                     <img alt="Skroll by designova" title="Skroll"   src="/images/portfolio/p05.jpg"/>
                                 </div>
                             </a>
-                            
                               
                             <a class="gallery-block" href="/images/portfolio/full/dummy.jpg" data-gal="prettyPhoto[portfolio]">
                                 <div class="element digital height-01" data-symbol="Re" data-category="digital">
@@ -567,8 +559,6 @@
                                     <img alt="Skroll by designova" title="Skroll"   src="/images/portfolio/p06.jpg"/>
                                 </div>
                             </a>
-                            
-                            
                               
                             <a class="gallery-block" href="/images/portfolio/full/dummy.jpg" data-gal="prettyPhoto[portfolio]">
                                 <div class="element ecommerce height-02 " data-symbol="Tl" data-category="ecommerce">
@@ -579,8 +569,6 @@
                                     <img alt="Skroll by designova" title="Skroll"   src="/images/portfolio/p07.jpg"    />
                                 </div>
                             </a>
-                            
-                            
                               
                             <a class="gallery-block" href="/images/portfolio/full/dummy.jpg" data-gal="prettyPhoto[portfolio]">
                                 <div class="element branding  height-03" data-symbol="Sb" data-category="branding ">
@@ -591,8 +579,6 @@
                                     <img alt="Skroll by designova" title="Skroll"   src="/images/portfolio/p08.jpg"    />
                                 </div>
                             </a>
-                            
-                            
                               
                             <a class="gallery-block" href="/images/portfolio/full/dummy.jpg" data-gal="prettyPhoto[portfolio]">
                                 <div class="element web height-01" data-symbol="Co" data-category="web">
@@ -603,8 +589,6 @@
                                     <img alt="Skroll by designova" title="Skroll"   src="/images/portfolio/p09.jpg"    />
                                 </div>
                             </a>
-                            
-                            
                               
                             <a class="gallery-block" href="/images/portfolio/full/dummy.jpg" data-gal="prettyPhoto[portfolio]">
                                 <div class="element digital height-03" data-symbol="Lu" data-category="digital">
@@ -616,7 +600,6 @@
                                 </div>
                             </a>
                             
-                            
                             <a class="gallery-block" href="/images/portfolio/full/dummy.jpg" data-gal="prettyPhoto[portfolio]">
                                 <div class="element creative  height-02 " data-symbol="Cd" data-category="creative">
                                     <article class="gallery-caps">
@@ -626,8 +609,6 @@
                                     <img alt="Skroll by designova" title="Skroll"   src="/images/portfolio/p11.jpg"    />
                                 </div>
                             </a>
-                            
-                            
                               
                             <a class="gallery-block" href="/images/portfolio/full/dummy.jpg" data-gal="prettyPhoto[portfolio]">
                                 <div class="element branding height-01" data-symbol="Ca" data-category="branding">
@@ -638,8 +619,6 @@
                                     <img alt="Skroll by designova" title="Skroll"   src="/images/portfolio/p12.jpg"    />
                                 </div>
                             </a>
-                            
-                            
                               
                             <a class="gallery-block" href="/images/portfolio/full/dummy.jpg" data-gal="prettyPhoto[portfolio]">
                                 <div class="element web height-01" data-symbol="Re" data-category="web">
@@ -650,8 +629,6 @@
                                     <img alt="Skroll by designova" title="Skroll"   src="/images/portfolio/p13.jpg"    />
                                 </div>
                             </a>
-                            
-                            
                               
                             <a class="gallery-block" href="/images/portfolio/full/dummy.jpg" data-gal="prettyPhoto[portfolio]">
                                 <div class="element ecommerce height-02 " data-symbol="Tl" data-category="ecommerce">
@@ -663,8 +640,6 @@
                                 </div>
                             </a>
                             
-                            
-                              
                             <a class="gallery-block" href="/images/portfolio/full/dummy.jpg" data-gal="prettyPhoto[portfolio]">
                                 <div class="element digital  height-03" data-symbol="Sb" data-category="digital ">
                                     <article class="gallery-caps">
