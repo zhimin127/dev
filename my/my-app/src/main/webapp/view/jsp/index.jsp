@@ -1146,10 +1146,7 @@
         </div>
     </footer>
 
-
-
-	<!-- JS
-	================================================== -->
+	<!-- JS ================================================== -->
 	<!-- <script src="/plugins/jquery/jquery-1.11.2.js"></script> -->
 	<script src="/plugins/jquery/jquery-1.7.2.min.js"></script>
 	<script src="/plugins/bootstrap-3.3.0/js/transition.js"></script>
@@ -1194,9 +1191,7 @@
 		
 		var no_of_testimonials = $('.testimonial_collection .testimonial').length;
 		
-		for(i=1;i<=no_of_testimonials;i++)
-		{	
-			
+		for(i=1;i<=no_of_testimonials;i++){	
 			if(i==1)
 			$('.testimonial_nav').append('<a href="#" class="active_nav" data-index="'+i+'"></a>');
 			else
@@ -1240,7 +1235,6 @@
     </script>
 	<!-- Sticky nav -->
 	<script>
-
 	$(window).load(function(){
 
       //NAVIGATION MENU COLOR CHANGE ON CLILCK
@@ -1255,7 +1249,6 @@
 				$(this).find('img').stop().animate({opacity:'0'},'slow')
 				$(this).find('.gallery-caps').stop().animate({opacity:'1'},'slow')
 			})
-
 			$('.element').mouseleave(function(){
 				$('.element').find('.gallery-caps').stop().animate({opacity:'0'},'slow')
 				$('.element').find('img').stop().animate({opacity:'1'},'slow')
@@ -1322,12 +1315,8 @@
         }
         return false;
       });
-
     });
   </script>	
-  
-  
-  
 <!-- End Document
 ================================================== -->
 </body>
