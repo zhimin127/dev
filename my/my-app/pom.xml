@@ -9,7 +9,7 @@
   </parent>
   <groupId>com.my.app</groupId>
   <artifactId>my-app</artifactId>
-  <version>0.0.1-BETA</version>
+  <version>1.0.1.RELEASE</version>
   <packaging>war</packaging>
   <name>my-app Maven Webapp</name>
   <url>http://maven.apache.org</url>
@@ -20,7 +20,7 @@
   	<dependency>
   		<groupId>com.my.service</groupId>
   		<artifactId>my-service</artifactId>
-  		<version>0.0.1-BETA</version>
+  		<version>1.0.0.RELEASE</version>
   	</dependency>
   </dependencies>
 </project>

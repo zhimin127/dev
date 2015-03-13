@@ -9,7 +9,7 @@
   </parent>
   <groupId>com.my.core</groupId>
   <artifactId>my-core</artifactId>
-  <version>0.0.1-BETA</version>
+  <version>1.0.0.RELEASE</version>
   <name>my-core</name>
   <url>http://maven.apache.org</url>
   <properties>
