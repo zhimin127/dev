@@ -36,7 +36,7 @@ $(document).ready(function() {
 				 }
 				 else {
 					 
-	      			$('.top_header').stop().animate({padding:'0px 0px'},1000);
+	      			$('.top_header').stop().animate({padding:'50px 0px'},1000);
 					$('.top_header').css({
 						'box-shadow':'none',
 						'-webkit-box-shadow':'none',
