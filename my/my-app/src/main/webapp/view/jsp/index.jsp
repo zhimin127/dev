@@ -1167,10 +1167,10 @@
     <script src="/plugins/prettyphoto-3.1.5/js/jquery.prettyPhoto.js"></script> 
 	  <script src="/plugins/jquery/jquery.easing.1.3.js"></script>
     <script src="/plugins/jquery/jquery.isotope.min.js"></script>
-    <script src="/scripts/fake-element.js"></script>
-    <script src="/scripts/form-validation.js"></script>
-    <script src="/scripts/waypoints.min.js"></script>
-  	<script src="/scripts/scroll.js"></script>
+    <script src="/template/mstp_55_skroll/javascripts/fake-element.js"></script>
+    <script src="/template/mstp_55_skroll/javascripts/form-validation.js"></script>
+    <script src="/template/mstp_55_skroll/javascripts/waypoints.min.js"></script>
+  	<script src="/template/mstp_55_skroll/javascripts/scroll.js"></script>
 
     <script type="text/javascript" src="/plugins/jquery/jquery.ba-cond.min.js"></script>
 	<!-- <script type="text/javascript" src="/plugins/jquery/jquery.slitslider.js"></script> -->
