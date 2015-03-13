@@ -11,9 +11,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <link href='http://fonts.useso.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
 <link href='http://fonts.useso.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="css/swipebox.css">
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.swipebox.min.js"></script> 
+<link href="/plugins/bootstrap-3.3.0/dist/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+<link href="/template/moban334/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="/template/moban334/css/swipebox.css">
+<script src="/template/moban334/js/jquery.min.js"></script>
+<script src="/template/moban334/js/jquery.swipebox.min.js"></script> 
 <script type="text/javascript">
 		jQuery(function($) {
 			$(".swipebox").swipebox();

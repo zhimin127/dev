@@ -3,8 +3,6 @@
 <html>
 <head>
 <title>About</title>
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Wolshino Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
@@ -12,10 +10,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <link href='http://fonts.useso.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
 <link href='http://fonts.useso.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
-<script src="js/jquery.min.js"></script>
-<link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all"/>
-<script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
+<link href="/plugins/bootstrap-3.3.0/dist/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+<link href="/template/moban334/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="/template/moban334/css/flexslider.css" type="text/css" media="screen" />
+<script src="/template/moban334/js/jquery.min.js"></script>
+<link href="/template/moban334/css/popuo-box.css" rel="stylesheet" type="text/css" media="all"/>
+<script src="/template/moban334/js/jquery.magnific-popup.js" type="text/javascript"></script>
 <script>
 		$(document).ready(function() {
 		$('.popup-with-zoom-anim').magnificPopup({
@@ -39,13 +39,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="head-nav">
 				<span class="menu"> </span>
 					<ul class="cl-effect-16">
-						<li class="active"><a href="about.html"  data-hover="ABOUT">ABOUT</a></li>
+						<li><a href="index.html"  data-hover="首页">首页</a></li>
 						<li><a href="projects.html"  data-hover="PROJECTS">PROJECTS</a></li>
 						<li><a href="gallery.html"  data-hover="GALLERY">GALLERY</a></li>
 						<li><a href="houses.html"  data-hover="HOUSES">HOUSES</a></li>
 						<li><a href="404.html"  data-hover="GENERAL PLAN">GENERAL PLAN</a></li>
-						<li><a href="contact.html"  data-hover="LOCATION">LOCATION</a></li>
-							<div class="clearfix"> </div>
+						<li><a href="contact.html"  data-hover="联系我们">联系我们</a></li>
+						<li class="active"><a href="about.html"  data-hover="关于我们">关于我们</a></li>
+							<!-- <div class="clearfix"> </div> -->
 					</ul>
 			</div>
 						<!-- script-for-nav -->
@@ -59,10 +60,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- script-for-nav --> 					
 			<div class="header-bottom">
 				<div class="head-left">
-					<p>+2  495  <span>134-27-72</span></p>
+					<p>+86  495  <span>134-27-72</span></p>
 				</div>
 					<div class="logo">
-						<a href="index.html"><img src="images/logo.png" class="img-responsive" alt="" /></a>
+						<a href="index.html"><img src="/template/moban334/images/logo.png" class="img-responsive" alt="" /></a>
 					</div>
 					<div class="head-right">
 						<div class="search2">
@@ -81,7 +82,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<h2>ABOUT</h2>
 			<div class="about">
 				<div class="col-md-5 about-right">
-					<img src="images/img4.jpg" class="img-responsive" alt="" />
+					<img src="/template/moban334/images/img4.jpg" class="img-responsive" alt="" />
 				</div>
 				<div class="col-md-7 about-left">
 					<h4>Typi non habent claritatem insitam</h4>
