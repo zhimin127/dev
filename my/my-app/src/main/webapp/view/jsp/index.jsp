@@ -25,6 +25,7 @@ function hideURLbar(){ window.scrollTo(0,1); }
 <link rel="stylesheet" href="/template/moban334/css/flexslider.css" type="text/css" media="screen" />
 <script src="/template/moban334/js/jquery.min.js"></script>
 <link href="/template/moban334/css/popuo-box.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="/css/default.css" rel="stylesheet" type="text/css" media="all"/>
 <script src="/template/moban334/js/jquery.magnific-popup.js" type="text/javascript"></script>
 <script>
 		$(document).ready(function() {
@@ -51,11 +52,11 @@ function hideURLbar(){ window.scrollTo(0,1); }
 				<span class="menu"> </span>
 					<ul class="cl-effect-16">
 						<li class="active"><a href="index.html"  data-hover="首页">首页</a></li>
-						<li><a href="projects.html"  data-hover="PROJECTS">PROJECTS</a></li>
-						<li><a href="gallery.html"  data-hover="GALLERY">GALLERY</a></li>
-						<li><a href="houses.html"  data-hover="HOUSES">HOUSES</a></li>
-						<li><a href="404.html"  data-hover="GENERAL PLAN">GENERAL PLAN</a></li>
-						<li><a href="contact.html"  data-hover="LOCATION">LOCATION</a></li>
+						<li><a href="projects.html"  data-hover="项目案例">项目案例</a></li>
+						<li><a href="houses.html"  data-hover="新闻中心">新闻中心</a></li>
+						<li><a href="404.html"  data-hover="阳光服务">阳光服务</a></li>
+						<!-- <li><a href="gallery.html"  data-hover="GALLERY">GALLERY</a></li>
+						<li><a href="contact.html"  data-hover="LOCATION">LOCATION</a></li> -->
 						<li><a href="about.html"  data-hover="关于我们">关于我们</a></li>
 							<!-- <div class="clearfix"> </div> -->
 					</ul>
@@ -71,7 +72,7 @@ function hideURLbar(){ window.scrollTo(0,1); }
 				<!-- script-for-nav --> 					
 			<div class="header-bottom">
 				<div class="head-left">
-					<p>+2  495  <span>134-27-72</span></p>
+					<p>+86  176  <span>008-77-12</span></p>
 				</div>
 					<div class="logo">
 						<a href="index.html"><img src="/template/moban334/images/logo.png" class="img-responsive" alt="" /></a>
@@ -214,7 +215,7 @@ function hideURLbar(){ window.scrollTo(0,1); }
 					</div>
 					<a class="play-icon popup-with-zoom-anim" href="#small-dialog"><span> </span></a>
 				<div id="small-dialog" class="mfp-hide">
-					<iframe src="/4SMfngnrSVy572fdICqnPC.mp4" width="" height="" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+					<iframe src="http://localhost/video/my/my-university-start.MP4" width="" height="" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 				</div>
 
 				</div>

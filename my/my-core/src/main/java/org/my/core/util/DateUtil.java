@@ -3,6 +3,11 @@ package org.my.core.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * 
+ * @author zhimin
+ *
+ */
 public class DateUtil {
 
 	public static final String SHORT_FORMAT = "yyyy-MM-dd";
