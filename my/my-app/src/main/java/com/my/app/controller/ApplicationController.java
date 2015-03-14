@@ -12,4 +12,9 @@ public class ApplicationController {
 	public ModelAndView error() {
 		return new ModelAndView("error");
 	}
+	
+	@RequestMapping(value = "header.html", method = RequestMethod.GET)
+	public ModelAndView header() {
+		return new ModelAndView("common/header");
+	}
 }
