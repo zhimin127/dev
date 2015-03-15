@@ -155,7 +155,7 @@ ul a:focus {
 	text-align: center;
 }
 .banner{
-	background:url(../images/banner1.jpg) no-repeat;
+	background:url(../images/banner2.jpg) no-repeat;
 	background-size: 100%;
 	-webkit-background-size:100%; 
 	-moz-background-size:100%;
@@ -247,12 +247,12 @@ ul.wmuSliderPagination {
 .wmuSliderNext {
 	background-position:-89px 2px;
 	right: 36em;
-	bottom: 0em;
+	bottom: 1em;
 }
 .wmuSliderPrev {
 	background-position:0px 2px;
 	right: 42em;
-	bottom: 0em;
+	bottom: 1em;
 }
 i.aspen {
 	width: 193px;
