@@ -33,8 +33,12 @@ function initMacSidebar(){
 			/*if (!isNotBlank(n.resourcePath)) {
 				menu += n.resourceName;
 			} else */{
-				var url =  baseURL + n.resourcePath;
-				if(!isNotBlank(n.resourcePath) || n.resourcePath == "#") url = 'javascript:void(0);'
+				var url =  n.resourcePath;
+				if(!isNotBlank(n.resourcePath) || n.resourcePath == "#") {
+					url = 'javascript:void(0);'
+				}else{
+					url = url.substring(1);
+				}
 				var _class = '';
 				if(typeof menuPos != 'undefined' && i == menuPos){
 					_class = ' class="open"'
