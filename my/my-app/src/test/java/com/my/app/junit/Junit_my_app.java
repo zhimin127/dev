@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.my.sys.service.SysUserService;
 import org.my.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -18,6 +19,8 @@ public class Junit_my_app {
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private SysUserService sysUserService;
 	
 	@Test
 	public void user(){

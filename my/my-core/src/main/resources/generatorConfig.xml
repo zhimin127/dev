@@ -4,7 +4,7 @@
 	<!-- eclipse 中，选择pom.xml文件，击右键先择Run AS——>Maven Build… ——>在Goals框中输入：mybatis-generator:generate -->
 	<!-- 命令行 mvn mybatis-generator:generate -->
 	<!-- /home/zhimin/.m2/repository/mysql/mysql-connector-java/5.1.30/mysql-connector-java-5.1.30.jar -->
-	<classPathEntry location="/home/zhimin/.m2/repository/mysql/mysql-connector-java/5.1.30/mysql-connector-java-5.1.30.jar" />
+	<classPathEntry location="E:\workspace/.m2/repository/mysql/mysql-connector-java/5.1.30/mysql-connector-java-5.1.30.jar" />
 	<context id="context1" targetRuntime="MyBatis3">
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/dev?useUnicode=true&amp;characterEncoding=UTF-8" userId="root"
 			password="123456" />
@@ -24,6 +24,6 @@
 		<javaClientGenerator targetPackage="org.my.core.common.dao" targetProject="src/main/java" type="XMLMAPPER">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
-		<table schema="dev" tableName="sys_users" />
+		<table schema="dev" tableName="sys_styles" />
 	</context>
 </generatorConfiguration>

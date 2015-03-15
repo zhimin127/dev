@@ -48,20 +48,21 @@ function hideURLbar(){ window.scrollTo(0,1); }
 	<div class="container">
 		<div class="wmuSlider example1 section" id="section-1">
 			<article style="position: absolute; width: 100%; opacity: 0;">
-				<div class="banner-info">
+				<div class="banner-info" style="background: url('/images/img10.jpg') center no-repeat;">
+					<!-- <div><img alt="ad" src="/images/img10.jpg"></div> -->
 					<h1>Veil project</h1>
 					<a href="#" class="meet wow bounceIn animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">JOIN</a>
 				</div>
 			</article>
 			<article style="position: absolute; width: 100%; opacity: 0;">
-				<div class="banner-info">
+				<div class="banner-info" style="background: url('/images/img9.jpg') center no-repeat;">
 					<h1>Lorem Ipsum has been</h1>
 					<a href="#" class="meet wow bounceIn animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">JOIN</a>
 				</div>
 			</article>
 			<article style="position: absolute; width: 100%; opacity: 0;">
-				<div class="banner-info">
-					<h1>The point of using Lorem</h1>
+				<div class="banner-info" style="background: url('/images/img12.jpg') center no-repeat;">
+					<h1>The point of using Lorem</h1>g
 					<a href="#" class="meet wow bounceIn animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">JOIN</a>
 				</div>
 			</article>
@@ -82,25 +83,25 @@ function hideURLbar(){ window.scrollTo(0,1); }
 <!-- types -->
 	<div class="types">
 		<div class="container">
-			<h3>6 house types</h3>
+			<h3>Case</h3>
 			<div class="col-md-3 types-top wow bounceIn animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
 				<i class="aspen"></i>
-				<h4>aspen</h4>
+				<h4>Web</h4>
 				<p>House area - 121.4 m2.Not a big compact and cozy house of wood. Gable roof. Second floor - attic. Space of the house clearly defined by function. To .... </p>
 			</div>
 			<div class="col-md-3 types-top wow bounceIn animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
 				<i class="heaven"></i>
-				<h4>heaven</h4>
+				<h4>Android</h4>
 				<p>House area - 121.4 m2.Not a big compact and cozy house of wood. Gable roof. Second floor - attic. Space of the house clearly defined by function. To .... </p>
 			</div>
 			<div class="col-md-3 types-top wow bounceIn animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
 				<i class="Veil"></i>
-				<h4>Veil</h4>
+				<h4>Windows</h4>
 				<p>House area - 121.4 m2.Not a big compact and cozy house of wood. Gable roof. Second floor - attic. Space of the house clearly defined by function. To .... </p>
 			</div>
 			<div class="col-md-3 types-top wow bounceIn animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
 				<i class="Tower"></i>
-				<h4>Tower</h4>
+				<h4>Mac</h4>
 				<p>House area - 121.4 m2.Not a big compact and cozy house of wood. Gable roof. Second floor - attic. Space of the house clearly defined by function. To .... </p>
 			</div>
 			<div class="clearfix"> </div>
