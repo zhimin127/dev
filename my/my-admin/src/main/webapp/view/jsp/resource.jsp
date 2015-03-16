@@ -43,11 +43,11 @@
               <div class="col-md-12">
                 <div class="widget">
                 <div class="widget-head">
-                  <div class="pull-left"><button class="btn btn-xs btn-primary"><i class="icon-plus"></i>添加资源</button></div>
-                  <div class="widget-icons pull-right">
+                  <div class="pull-left"><button class="btn btn-xs btn-primary wclose"><i class="icon-plus"></i>添加资源</button></div>
+                 <!--  <div class="widget-icons pull-right">
                     <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a> 
                     <a href="#" class="wclose"><i class="icon-remove"></i></a>
-                  </div>  
+                  </div>  --> 
                   <div class="clearfix"></div>
                 </div>
                   <div class="widget-content">
@@ -99,7 +99,31 @@
                 </div>
               </div>
             </div>
-        </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="widget">
+                <div class="widget-head">
+                 <div class="pull-left">添加资源</div>
+                  <div class="clearfix"></div>
+                </div>
+                  <div class="widget-content">
+              <form>
+			  <fieldset>
+			    <!-- <legend>Legend</legend> -->
+			    <label>Label name</label>
+			    <input type="text" placeholder="Type something…">
+			    <span class="help-block">Example block-level help text here.</span>
+			    <label class="checkbox">
+			      <input type="checkbox"> Check me out
+			    </label>
+			    <button type="submit" class="btn">Submit</button>
+			  </fieldset>
+			</form>
+			<div class="clearfix"></div>
+			</div>
+              </div>
+            </div>
+        </div></div>
 		  </div>
 		<!-- Matter ends -->
     </div>
@@ -113,7 +137,11 @@
   <%@include file="common/inc_js.html" %>
 <script>
 var menuPos = 2;
-var baseURL = "/admin"
+$(function(){
+	$('.pull-left .btn').click(function(){
+		alert(1)
+	});
+});
 </script>
 </body>
 </html>
