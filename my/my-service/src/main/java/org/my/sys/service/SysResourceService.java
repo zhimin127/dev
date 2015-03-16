@@ -11,13 +11,17 @@ public interface SysResourceService {
 	
 	List<SysResources> getAll();
 
-	List<SysResource> getAllAuth();
+	List<SysResource> findAllAuth();
 
-	List<SysResource> getNavResourceByRoleId(String roleId);
+	List<SysResource> findNavResourceByRoleId(String roleId);
 
 	SysResources getByTypeAndResourceName(String resourceType, String resourceName);
 
-	List<SysResource> getByT(SysResource resource);
+	List<SysResources> getByT(SysResource resource);
 
-	List<SysResource> getPageByT(SysResource resource, int page, int pageSize);
+	List<SysResources> getPageByT(SysResource resource, int page, int pageSize);
+	
+	List<SysResource> findByT(SysResource resource);
+	
+	List<SysResource> findPageByT(SysResource resource, int page, int pageSize);
 }

@@ -15,7 +15,7 @@ public interface SysUserService {
 
 	SysUsers getByUsernameAndPassword(String username, String password);
 
-	SysUser getByUsername(String userName);
+	SysUser findByUsername(String userName);
 
 	PageInfo<SysUsers> getPage(int page, int rows);
 	

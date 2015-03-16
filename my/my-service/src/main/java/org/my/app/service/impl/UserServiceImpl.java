@@ -1,11 +1,11 @@
-package org.my.user.service.impl;
+package org.my.app.service.impl;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.my.app.service.UserService;
 import org.my.core.user.dao.UserDao;
-import org.my.user.service.UserService;
 import org.springframework.stereotype.Service;
 
 @Service("userService")

@@ -6,12 +6,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.my.app.service.UserService;
 import org.my.core.common.model.SysUsers;
 import org.my.core.sys.model.SysResource;
 import org.my.core.util.GsonUtil;
 import org.my.sys.service.SysResourceService;
 import org.my.sys.service.SysUserService;
-import org.my.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -36,7 +36,7 @@ public class Junit_my_admin {
 	//@Test
 	public void getUser() {
 		SysUsers user = sysUserService.getByUsernameAndPassword("admin", "admin");
-		user = sysUserService.getByUsername("admin");
+		user = sysUserService.findByUsername("admin");
 		logger.info(GsonUtil.toJson(user));
 	}
 
@@ -45,7 +45,7 @@ public class Junit_my_admin {
 	@Test
 	public void getResources() {
 		//SysRoles role = sysRoleService.getRoleByName(baseRole[0]);
-		List<SysResource> nav = sysResourcesService.getNavResourceByRoleId("818181ec4ad85c9a014ad85c9ad60000");
+		List<SysResource> nav = sysResourcesService.findNavResourceByRoleId("818181ec4ad85c9a014ad85c9ad60000");
 		
 		for(SysResource sub:nav.get(0).getSubResources()){
 			System.out.println(sub.getResourceName()+":" +GsonUtil.toJson(sub.getSubResources()));

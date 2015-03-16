@@ -15,7 +15,7 @@ public class SysUserDaoImpl extends BaseDaoImpl<SysUser> implements SysUserDao {
 
 	protected final Log logger = LogFactory.getLog(getClass());
 
-	public SysUser findByUserName(String username) {
+	public SysUser findByUsername(String username) {
 		return getSqlSession().selectOne(MapperEnum.SYS_USER.getMapperName() + ".findByUsername", username);
 	}
 

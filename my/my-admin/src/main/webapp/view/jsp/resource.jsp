@@ -9,7 +9,7 @@
   <title>资源管理</title> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   <meta name="author" content="">
-  <%@include file="common/inc.html" %>
+  <%@include file="common/inc_css.html" %>
 </head>
 <body>
 <c:import url="common/header.jsp">
@@ -19,63 +19,48 @@
 <div class="content">
   	<!-- Sidebar -->
     <div class="sidebar"></div>
-
     <!-- Sidebar ends -->
-
   	<!-- Main bar -->
   	<div class="mainbar">
-
       <!-- Page heading -->
       <div class="page-head">
         <h2 class="pull-left"><i class="icon-table"></i> 资源管理</h2>
-
         <!-- Breadcrumb -->
         <div class="bread-crumb pull-right">
-          <a href="index.html"><i class="icon-home"></i> Home</a> 
+          <a href="index.html"><i class="icon-home"></i>首页</a> 
           <!-- Divider -->
           <span class="divider">/</span> 
-          <a href="#" class="bread-current">Dashboard</a>
+          <a href="#" class="bread-current">资源管理</a>
         </div>
-
         <div class="clearfix"></div>
-
       </div>
       <!-- Page heading ends -->
-
 	    <!-- Matter -->
-
 	    <div class="matter">
         <div class="container">
-
           <!-- Table -->
-
             <div class="row">
-
               <div class="col-md-12">
-
                 <div class="widget">
-
                 <div class="widget-head">
-                  <div class="pull-left">Tables</div>
+                  <div class="pull-left"><button class="btn btn-xs btn-primary"><i class="icon-plus"></i>添加资源</button></div>
                   <div class="widget-icons pull-right">
                     <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a> 
                     <a href="#" class="wclose"><i class="icon-remove"></i></a>
                   </div>  
                   <div class="clearfix"></div>
                 </div>
-
                   <div class="widget-content">
-
                     <table class="table table-striped table-bordered table-hover">
                       <thead>
                         <tr>
-                          <th>#</th>
-                          <th>Name</th>
-                          <th>Location</th>
-                          <th>Date</th>
-                          <th>Type</th>
-                          <th>Status</th>
-                          <th>Control</th>
+                          <th>序号</th>
+                          <th>名称</th>
+                          <th>链接</th>
+                          <th>所属资源</th>
+                          <th>类型</th>
+                          <th>状态</th>
+                          <th>操作</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -84,8 +69,11 @@
                           <td align="center">${status.index+1}</td>
                           <td>${item.resourceName}</td>
                           <td>${item.resourcePath}</td>
-                          <td>23/12/2012</td>
-                          <td>${item.resourceType}</td>
+                          <td>${item.parentId}</td>
+                          <td>
+                          	<c:if test="${item.resourceType == '0'}">菜单</c:if>
+                          	<c:if test="${item.resourceType == '1'}">按钮</c:if>
+                          </td>
                           <td><span class="label ${item.enabled=='1'?'label-success':'label-default' }">Active</span></td>
                           <td>
                               <button class="btn btn-xs btn-success"><i class="icon-ok"></i> </button>
@@ -96,7 +84,6 @@
 						</c:forEach>
                       </tbody>
                     </table>
-
                     <div class="widget-foot">
                         <ul class="pagination pull-right">
                           <li><a href="#">Prev</a></li>
@@ -114,68 +101,16 @@
             </div>
         </div>
 		  </div>
-
 		<!-- Matter ends -->
-
     </div>
-
    <!-- Mainbar ends -->	    	
    <div class="clearfix"></div>
-
 </div>
 <!-- Content ends -->
-
-<!-- Footer starts -->
-<footer>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-            <!-- Copyright info -->
-            <p class="copy">Copyright &copy; 2012 | <a href="#">Your Site</a> </p>
-      </div>
-    </div>
-  </div>
-</footer> 	
-
-<!-- Footer ends -->
-
+  <%@include file="common/footer.jsp" %>
 <!-- Scroll to top -->
 <span class="totop"><a href="#"><i class="icon-chevron-up"></i></a></span> 
-
-<!-- JS -->
-<script src="static/js/jquery.js"></script> <!-- jQuery -->
-<script src="static/js/jquery-migrate-1.1.1.min.js"></script> <!-- jQuery -->
-<script src="static/scripts/my.nav.js"></script><!-- Navigation -->
-<script src="static/js/bootstrap.js"></script> <!-- Bootstrap -->
-<script src="static/js/jquery-ui-1.9.2.custom.min.js"></script> <!-- jQuery UI -->
-<script src="static/js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
-<script src="static/js/jquery.rateit.min.js"></script> <!-- RateIt - Star rating -->
-<script src="static/js/jquery.prettyPhoto.js"></script> <!-- prettyPhoto -->
-
-<!-- jQuery Flot -->
-<script src="static/js/excanvas.min.js"></script>
-<script src="static/js/jquery.flot.js"></script>
-<script src="static/js/jquery.flot.resize.js"></script>
-<script src="static/js/jquery.flot.pie.js"></script>
-<script src="static/js/jquery.flot.stack.js"></script>
-
-<!-- jQuery Notification - Noty -->
-<script src="static/js/jquery.noty.js"></script> <!-- jQuery Notify -->
-<script src="static/js/themes/default.js"></script> <!-- jQuery Notify -->
-<script src="static/js/layouts/bottom.js"></script> <!-- jQuery Notify -->
-<script src="static/js/layouts/topRight.js"></script> <!-- jQuery Notify -->
-<script src="static/js/layouts/top.js"></script> <!-- jQuery Notify -->
-<!-- jQuery Notification ends -->
-
-<script src="static/js/sparklines.js"></script> <!-- Sparklines -->
-<script src="static/js/jquery.cleditor.min.js"></script> <!-- CLEditor -->
-<script src="static/js/bootstrap-datetimepicker.min.js"></script> <!-- Date picker -->
-<script src="static/js/jquery.uniform.min.js"></script> <!-- jQuery Uniform -->
-<script src="static/js/bootstrap-switch.min.js"></script> <!-- Bootstrap Toggle -->
-<script src="static/js/filter.js"></script> <!-- Filter for support page -->
-<script src="static/js/custom.js"></script> <!-- Custom codes -->
-<script src="static/js/charts.js"></script> <!-- Charts & Graphs -->
-
+  <%@include file="common/inc_js.html" %>
 <script>
 var menuPos = 2;
 var baseURL = "/admin"

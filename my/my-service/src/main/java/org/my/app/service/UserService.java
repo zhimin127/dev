@@ -1,4 +1,4 @@
-package org.my.user.service;
+package org.my.app.service;
 
 public interface UserService {
 

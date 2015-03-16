@@ -13,6 +13,7 @@
 					<!-- <li><a href="gallery.html"  data-hover="GALLERY">GALLERY</a></li>
 						<li><a href="contact.html"  data-hover="联系我们">联系我们</a></li> -->
 					<li><a href="about.html" data-hover="关于我们">关于我们</a></li>
+					<li><a href="editor.html"  data-hover="编辑器">编辑器</a></li>
 					<!-- <div class="clearfix"> </div> -->
 				</ul>
 			</div>

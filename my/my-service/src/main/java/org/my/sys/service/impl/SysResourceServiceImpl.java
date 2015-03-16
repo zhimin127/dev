@@ -2,9 +2,11 @@ package org.my.sys.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.my.core.common.dao.SysResourcesMapper;
 import org.my.core.common.model.SysResources;
 import org.my.core.common.model.SysResourcesExample;
+import org.my.core.common.model.SysResourcesExample.Criteria;
 import org.my.core.sys.dao.SysResourceDao;
 import org.my.core.sys.model.SysResource;
 import org.my.sys.service.SysResourceService;
@@ -27,11 +29,11 @@ public class SysResourceServiceImpl implements SysResourceService {
 		return sysResourcesMapper.selectByExample(null);
 	}
 
-	public List<SysResource> getAllAuth() {
+	public List<SysResource> findAllAuth() {
 		return sysResourceDao.findAllAuth();
 	}
 
-	public List<SysResource> getNavResourceByRoleId(String roleId) {
+	public List<SysResource> findNavResourceByRoleId(String roleId) {
 		return sysResourceDao.findNavResourceByRoleId(roleId);
 	}
 
@@ -45,11 +47,34 @@ public class SysResourceServiceImpl implements SysResourceService {
 		return null;
 	}
 
-	public List<SysResource> getByT(SysResource resource) {
+	public List<SysResource> findByT(SysResource resource) {
 		return sysResourceDao.findByT(resource);
 	}
 
-	public List<SysResource> getPageByT(SysResource resource, int page, int pageSize) {
+	public List<SysResource> findPageByT(SysResource resource, int page, int pageSize) {
 		return sysResourceDao.findPageByT(resource, page, pageSize);
+	}
+
+	public List<SysResources> getByT(SysResource resource) {
+		return null;
+	}
+
+	public List<SysResources> getPageByT(SysResource resource, int page, int pageSize) {
+		SysResourcesExample example = new SysResourcesExample();
+		Criteria criteria =example.createCriteria();
+		if(StringUtils.isNotBlank(resource.getIsSys())){
+			criteria.andIsSysEqualTo(resource.getIsSys());
+		}
+		if(StringUtils.isNotBlank(resource.getResourceType())){
+			criteria.andIsSysEqualTo(resource.getResourceType());
+		}
+		List<SysResources> list =  sysResourcesMapper.selectByExample(example);
+		for(SysResources res:list){
+			if(StringUtils.isNotBlank(res.getParentId())){
+				SysResources pres = sysResourcesMapper.selectByPrimaryKey(res.getParentId());
+				res.setParentId(pres.getResourceName());
+			}
+		}
+		return list;
 	}
 }

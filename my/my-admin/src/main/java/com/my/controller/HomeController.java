@@ -29,7 +29,7 @@ public class HomeController {
 		logger.info(auth.getName());
 		SysRoles role = (SysRoles) request.getSession().getAttribute(Constants.CURRENT_ROLE);
 		if (role == null) {
-			SysUser user = sysUserService.getByUsername(auth.getName());
+			SysUser user = sysUserService.findByUsername(auth.getName());
 			request.getSession().setAttribute(Constants.CURRENT_ROLE, user.getRoles().get(0));
 		}
 		return new ModelAndView("index");

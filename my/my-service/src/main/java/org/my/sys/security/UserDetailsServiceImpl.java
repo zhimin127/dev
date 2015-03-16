@@ -31,7 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		logger.info("============================== 1.用户 " + username + " ============================== ");
 		User user = null;// (User) this.userCache.getUserFromCache(username);
 		if (user == null) {
-			SysUser userAccount = userService.getByUsername(username);
+			SysUser userAccount = userService.findByUsername(username);
 			if (userAccount == null) {
 				throw new UsernameNotFoundException("用户名不存在！");
 			}

@@ -7,7 +7,7 @@ import org.my.core.sys.model.SysUser;
 
 public interface SysUserDao extends BaseDao<SysUser>{
 
-	public SysUser findByUserName(String username);
+	public SysUser findByUsername(String username);
 
 	public void addUserRole(Map<String, String> record);
 

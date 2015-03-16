@@ -34,6 +34,9 @@
 		<if test="resourceType != null">
 			RESOURCE_TYPE = #{resourceType}
 		</if>
+		<if test="isSys != null">
+			IS_SYS = #{isSys}
+		</if>
 		</where>
 	</select>
 

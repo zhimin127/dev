@@ -49,11 +49,11 @@ public class SysUserServiceImpl implements SysUserService {
 		return null;
 	}
 
-	public SysUser getByUsername(String username) {
+	public SysUser findByUsername(String username) {
 		if (username == null) {
 			return null;
 		}
-		return sysUserDao.findByUserName(username);
+		return sysUserDao.findByUsername(username);
 	}
 
 	public void save(SysUsers record) {

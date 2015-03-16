@@ -1,17 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE HTML>
 <html>
-<title>welcom my</title>
+<head>
+<title>Editor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Wolshino Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+
 <link href="//g.alicdn.com/kissy/k/1.4.7/css/dpl/base-min.css" rel="stylesheet" />
 <link href="//g.alicdn.com/kissy/k/1.4.7/editor/theme/cool/editor-min.css?1" rel="stylesheet" />
 <!-- use seed-min in production-->
 <script src="//g.alicdn.com/kissy/k/1.4.7/seed.js" data-config="{combine:true}"></script>
+<%@include file="common/inc.jsp" %>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href='http://fonts.useso.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.useso.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/template/moban334/css/flexslider.css" type="text/css" media="screen" />
+<link href="/template/moban334/css/popuo-box.css" rel="stylesheet" type="text/css" media="all"/>
+<script src="/template/moban334/js/jquery.magnific-popup.js" type="text/javascript"></script>
 
-<script src="js/jquery-1.11.0.min.js" ></script>
-<body style="margin: 10px 10px;">
-	<h2>Hello World!</h2>
+</head>
+<body>
+<c:import url="common/header.jsp">
+	<c:param name="pos" value="5"></c:param>
+</c:import>
+	<div class="main">
+		<div class="container">
+			<h2>Editor</h2>
 	<form action="upload.jss" enctype="multipart/form-data">
 	<textarea rows="10" cols="30" id="ks-editor-textarea" style="width: 800px; height: 300px"></textarea>
 	</form>
+	</div>
+</div>
+	<c:import url="common/footer.jsp"></c:import>
 </body>
 <script type="text/javascript">
 	KISSY.use("editor", function(S, Editor) {
