@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="utf-8">
@@ -9,10 +9,15 @@
   <title>资源管理</title> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   <meta name="author" content="">
-  <%@include file="common/inc_css.html" %>
+  <%@include file="inc/css.html" %>
+  <style>
+  .fade{
+  padding: 150px 0 0 0px;
+  }
+  </style>
 </head>
 <body>
-<c:import url="common/header.jsp">
+<c:import url="inc/header.jsp">
 	<c:param name="pos" value="0"></c:param>
 </c:import>
 <!-- Main content starts -->
@@ -43,7 +48,11 @@
               <div class="col-md-12">
                 <div class="widget">
                 <div class="widget-head">
-                  <div class="pull-left"><button class="btn btn-xs btn-primary wclose"><i class="icon-plus"></i>添加资源</button></div>
+                  <div class="pull-left">
+                  <button class="btn btn-xs btn-primary" data-target="#myModal"  data-toggle="modal" data-backdrop="static" ><!-- data-remote="resource/create" -->
+                  	<i class="icon-plus"></i>添加资源
+                  	</button>
+                  </div>
                  <!--  <div class="widget-icons pull-right">
                     <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a> 
                     <a href="#" class="wclose"><i class="icon-remove"></i></a>
@@ -99,23 +108,31 @@
                 </div>
               </div>
             </div>
-            <div class="row">
-            <div class="col-md-12">
-              <div class="widget wgreen">
-                <div class="widget-head">
-                  <div class="pull-left">Forms</div>
-                  <div class="widget-icons pull-right">
-                    <!-- <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a> 
-                    <a href="#" class="wclose"><i class="icon-remove"></i></a> -->
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="widget-content">
-                  <div class="padd">
-                    <h6>Input Boxs</h6>
-                    <hr />
+            
+        </div>
+		  </div>
+		<!-- Matter ends -->
+    </div>
+   <!-- Mainbar ends -->	    	
+   <div class="clearfix"></div>
+   <!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               添加资源
+            </h4>
+         </div>
+         <div class="modal-body">
+            
                     <!-- Form starts.  -->
-                     <form class="form-horizontal" role="form">
+                     <form class="form-horizontal" role="form" action="resource/create" method="post">
                                 <div class="form-group">
                                   <label class="col-lg-4 control-label">名称</label>
                                   <div class="col-lg-8">
@@ -134,7 +151,7 @@
                                 <div class="form-group">
                                   <label class="col-lg-4 control-label">链接</label>
                                   <div class="col-lg-8">
-                                    <input type="password" class="form-control" placeholder="链接">
+                                    <input type="text" class="form-control" placeholder="链接">
                                   </div>
                                 </div>
                                 <div class="form-group">
@@ -173,46 +190,43 @@
                                       </label>
                                     </div>
                                   </div>
-                                </div>         
-                                    <hr />
-                                <div class="form-group">
-                                  <div class="col-lg-offset-1 col-lg-9">
-                                    <button type="button" class="btn btn-default">Default</button>
-                                    <button type="button" class="btn btn-primary">Primary</button>
-                                    <button type="button" class="btn btn-success">Success</button>
-                                    <button type="button" class="btn btn-info">Info</button>
-                                    <button type="button" class="btn btn-warning">Warning</button>
-                                    <button type="button" class="btn btn-danger">Danger</button>
-                                  </div>
                                 </div>
                               </form>
-                  </div>
-                </div>
-                  <div class="widget-foot">
-                    <!-- Footer goes here -->
-                  </div>
-              </div>  
-            </div>
-          </div>
-        </div>
-		  </div>
-		<!-- Matter ends -->
-    </div>
-   <!-- Mainbar ends -->	    	
-   <div class="clearfix"></div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+            </button>
+            <button type="button" class="btn btn-primary">
+               提交更改
+            </button>
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal --></div>
 </div>
 <!-- Content ends -->
-  <%@include file="common/footer.jsp" %>
+  <%@include file="inc/footer.jsp" %>
 <!-- Scroll to top -->
 <span class="totop"><a href="#"><i class="icon-chevron-up"></i></a></span> 
-  <%@include file="common/inc_js.html" %>
+  <%@include file="inc/js.html" %>
 <script>
 var menuPos = 2;
 $(function(){
+	initWinPosition("#myModal");
+	$("#myModal").on("hidden.bs.modal", function() { $(this).removeData("bs.modal"); });
 	$('.pull-left .btn').click(function(){
 		
 	});
 });
+function initWinPosition(winId){
+	var _scrollHeight = $(document).scrollTop(), // 获取当前窗口距离页面顶部高度
+	_windowHeight = $(window).height(), // 获取当前窗口高度
+	_windowWidth = $(window).width(), // 获取当前窗口宽度
+	_popupHeight = $(winId).height(), // 获取弹出层高度
+	_popupWeight = $(winId).width();// 获取弹出层宽度
+	_posiTop = (_windowHeight - _popupHeight) / 2 + _scrollHeight;
+	_posiLeft = (_windowWidth - _popupWeight) / 2;
+	$(winId).css({'padding-top':_posiTop});
+}
 </script>
 </body>
 </html>

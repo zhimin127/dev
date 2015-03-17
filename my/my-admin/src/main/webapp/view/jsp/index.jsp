@@ -6,13 +6,13 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="utf-8">
   <!-- Title and other stuffs -->
-  <title>Mac风格响应式后台</title>
+  <title>My 后台管理</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="">
-  <%@include file="common/inc.html" %>
+  <%@include file="inc/css.html" %>
 </head>
 <body>
-<c:import url="common/header.jsp">
+<c:import url="inc/header.jsp">
 	<c:param name="pos" value="0"></c:param>
 </c:import>
 <!-- Main content starts -->
@@ -532,10 +532,11 @@
    <div class="clearfix"></div>
 </div>
 <!-- Content ends -->
-  <%@include file="common/footer.jsp" %>
+  <%@include file="inc/footer.jsp" %>
 <!-- Scroll to top -->
 <span class="totop"><a href="#"><i class="icon-chevron-up"></i></a></span> 
 
+  <%@include file="inc/js.html" %>
 <!-- Script for this page -->
 <script type="text/javascript">
 $(function () {

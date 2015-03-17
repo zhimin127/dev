@@ -8,7 +8,7 @@
   <title>后台登陆页面</title> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="">
-  <%@include file="common/inc.html" %>
+  <%@include file="inc/jscss.html" %>
   <!-- Style sheets -->
   <link rel="stylesheet" href="/sys/css/font-awesome.css">
 <link href="/sys/css/style.css" rel="stylesheet">

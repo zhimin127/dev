@@ -42,7 +42,7 @@ public class ResourceController {
 		// SysRoles role = (SysRoles)
 		// request.getSession().getAttribute(Constants.CURRENT_ROLE);
 		SysResource resource = new SysResource();
-		resource.setIsSys("0");
+		//resource.setIsSys("0");
 		List<SysResources> resources = sysResourceService.getPageByT(resource, pageNum, pageSize);
 		PageInfo<SysResources> pageView = new PageInfo<SysResources>(resources);
 		pageView.setPageNum(pageNum);
@@ -50,8 +50,14 @@ public class ResourceController {
 		return new ModelAndView("resource");
 	}
 
+	@RequestMapping(value = "create", method = RequestMethod.GET)
+	public ModelAndView create(Model model, HttpServletRequest request) {
+		
+		return  new ModelAndView("resourceInfo");
+	}
+
 	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public Map<String, Object> create(HttpServletRequest request,SysResources resource) {
+	public Map<String, Object> save(HttpServletRequest request,SysResources resource) {
 		result = new HashMap<String, Object>();
 		// Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		//SysRoles role = (SysRoles) request.getSession().getAttribute(Constants.CURRENT_ROLE);
