@@ -132,17 +132,17 @@
          <div class="modal-body">
             
                     <!-- Form starts.  -->
-                     <form class="form-horizontal" role="form" action="resource/create" method="post">
+                     <form class="form-horizontal" role="form" action="resource/create" method="post" id="resouceForm">
                                 <div class="form-group">
                                   <label class="col-lg-4 control-label">名称</label>
                                   <div class="col-lg-8">
-                                    <input type="text" class="form-control" placeholder="名称">
+                                    <input type="text" class="form-control" placeholder="名称" name="resourceName">
                                   </div>
                                 </div>
                                 <div class="form-group">
                                   <label class="col-lg-4 control-label">类型</label>
                                   <div class="col-lg-8">
-                                    <select class="form-control">
+                                    <select class="form-control" name="resourceType">
                                       <option value="0">菜单</option>
                                       <option value="1">按钮</option>
                                     </select>
@@ -151,13 +151,13 @@
                                 <div class="form-group">
                                   <label class="col-lg-4 control-label">链接</label>
                                   <div class="col-lg-8">
-                                    <input type="text" class="form-control" placeholder="链接">
+                                    <input type="text" class="form-control" placeholder="链接" name="resourcePath">
                                   </div>
                                 </div>
                                 <div class="form-group">
                                   <label class="col-lg-4 control-label">描述</label>
                                   <div class="col-lg-8">
-                                    <textarea class="form-control" rows="3" placeholder="描述"></textarea>
+                                    <textarea class="form-control" rows="3" placeholder="描述" name="resourceDesc"></textarea>
                                   </div>
                                 </div>    
                                 <div class="form-group">
@@ -232,6 +232,18 @@ function modify(){
 	var target = $(this).attr("data-target");
 	var opt  = $(this).attr("data-opt");
 	if(opt == "modify"){
+		$.ajax({
+			url: "resource/info?id="+id,
+			dataType:"json",
+			success:function(data){
+				if(data.ok){
+					var res = data.resource;
+					$("input[name='resourceName']").val(res.resourceName);
+					$("input[name='resourcePath']").val(res.resourcePath);
+				}
+			}
+		});
+		//$("#resouceForm").form("load","resouce/info?id="+id);
 		$(target).modal('show');
 	}
 }

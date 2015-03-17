@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -60,6 +61,15 @@ public class ResourceController {
 		// Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		//SysRoles role = (SysRoles) request.getSession().getAttribute(Constants.CURRENT_ROLE);
 		
+		return result;
+	}
+
+	@RequestMapping(value = "info", method = RequestMethod.GET)
+	public Map<String, Object> info(Model model,@PathParam(value = "id") String id, HttpServletRequest request) {
+		SysResources resource =  sysResourceService.getById(id);
+		result = new HashMap<String, Object>();
+		result.put("ok", true);
+		result.put("resource", resource);
 		return result;
 	}
 

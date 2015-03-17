@@ -8,6 +8,8 @@ import org.my.core.sys.model.SysResource;
 public interface SysResourceService {
 
 	void save(SysResources resource);
+
+	SysResources getById(String id);
 	
 	List<SysResources> getAll();
 

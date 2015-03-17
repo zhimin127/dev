@@ -77,4 +77,9 @@ public class SysResourceServiceImpl implements SysResourceService {
 		}
 		return list;
 	}
+
+	@Override
+	public SysResources getById(String id) {
+		return sysResourcesMapper.selectByPrimaryKey(id);
+	}
 }
