@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.my.core.Constants;
 import org.my.core.common.model.SysResources;
-import org.my.core.common.model.SysRoles;
 import org.my.core.sys.model.SysResource;
 import org.my.sys.service.SysResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +48,7 @@ public class ResourceController {
 		return new ModelAndView("resource");
 	}
 
-	@RequestMapping(value = "create", method = RequestMethod.GET)
+	//@RequestMapping(value = "create", method = RequestMethod.GET)
 	public ModelAndView create(Model model, HttpServletRequest request) {
 		
 		return  new ModelAndView("resourceInfo");

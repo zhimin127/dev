@@ -12,7 +12,7 @@
   <%@include file="inc/css.html" %>
   <style>
   .fade{
-  padding: 150px 0 0 0px;
+ 
   }
   </style>
 </head>
@@ -85,9 +85,9 @@
                           </td>
                           <td><span class="label ${item.enabled=='1'?'label-success':'label-default' }">Active</span></td>
                           <td>
-                              <button class="btn btn-xs btn-success"><i class="icon-ok"></i> </button>
-                              <button class="btn btn-xs btn-warning"><i class="icon-pencil"></i> </button>
-                              <button class="btn btn-xs btn-danger"><i class="icon-remove"></i> </button>
+                              <button class="btn btn-xs btn-success" data-id='${item.resourceId}'><i class="icon-ok"></i> </button>
+                              <button class="btn btn-xs btn-warning"  data-id='${item.resourceId}' data-target="#myModal"  data-opt="modify"><i class="icon-pencil"></i> </button>
+                              <button class="btn btn-xs btn-danger"  data-id='${item.resourceId}'><i class="icon-remove"></i> </button>
                           </td>
                         </tr>
 						</c:forEach>
@@ -211,21 +211,29 @@
 <script>
 var menuPos = 2;
 $(function(){
-	initWinPosition("#myModal");
-	$("#myModal").on("hidden.bs.modal", function() { $(this).removeData("bs.modal"); });
-	$('.pull-left .btn').click(function(){
-		
-	});
+	//$("#myModal").on("hidden.bs.modal", function() { $(this).removeData("bs.modal"); });
+	$('#myModal').on('show.bs.modal', function () {
+		var _self = $(this);
+		/* $(this).find('.modal-dialog').css({  
+	        'margin-top': function () { 
+	        	var _scrollHeight = $(document).scrollTop(), // 获取当前窗口距离页面顶部高度
+	        	_windowHeight = $(window).height(); // 获取当前窗口高度
+	            var _modalHeight = _self.height();  
+	        	//alert(_windowHeight +":"+ _modalHeight+";" + _scrollHeight);
+	        	_posTop =_scrollHeight;
+	            return _posTop;  
+	        }  
+	    }); */
+	})
+	$('.widget .btn').click(modify);
 });
-function initWinPosition(winId){
-	var _scrollHeight = $(document).scrollTop(), // 获取当前窗口距离页面顶部高度
-	_windowHeight = $(window).height(), // 获取当前窗口高度
-	_windowWidth = $(window).width(), // 获取当前窗口宽度
-	_popupHeight = $(winId).height(), // 获取弹出层高度
-	_popupWeight = $(winId).width();// 获取弹出层宽度
-	_posiTop = (_windowHeight - _popupHeight) / 2 + _scrollHeight;
-	_posiLeft = (_windowWidth - _popupWeight) / 2;
-	$(winId).css({'padding-top':_posiTop});
+function modify(){
+	var id = $(this).attr("data-id");
+	var target = $(this).attr("data-target");
+	var opt  = $(this).attr("data-opt");
+	if(opt == "modify"){
+		$(target).modal('show');
+	}
 }
 </script>
 </body>
