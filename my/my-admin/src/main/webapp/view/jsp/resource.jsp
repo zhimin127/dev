@@ -14,6 +14,18 @@
   .fade{
  
   }
+#grid-resources tr th{
+  border-top:  1px solid #ddd !important;
+}
+.bootgrid-header, .bootgrid-footer {
+  margin: 10px 0;
+}
+.bootgrid-footer .paginationBar{
+	text-align: right;
+}
+.bootgrid-footer .infoBar{
+	display: none;
+}
   </style>
 </head>
 <body>
@@ -47,53 +59,33 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="widget">
-                <div class="widget-head">
+                <!-- <div class="widget-head">
                   <div class="pull-left">
-                  <button class="btn btn-xs btn-primary" data-target="#myModal"  data-toggle="modal" data-backdrop="static" ><!-- data-remote="resource/create" -->
+                  <button class="btn btn-xs btn-primary " data-target="#myModal"  data-toggle="modal" data-backdrop="static" >data-remote="resource/create"
                   	<i class="icon-plus"></i>添加资源
                   	</button>
                   </div>
-                 <!--  <div class="widget-icons pull-right">
+                  <div class="widget-icons pull-right">
                     <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a> 
                     <a href="#" class="wclose"><i class="icon-remove"></i></a>
-                  </div>  --> 
+                  </div>  
                   <div class="clearfix"></div>
-                </div>
+                </div> -->
                   <div class="widget-content">
-                    <table class="table table-striped table-bordered table-hover">
-                      <thead>
+                <table id="grid-resources" class="table table-hover table-striped table-bordered">
+                    <thead>
                         <tr>
-                          <th>#</th>
-                          <th>名称</th>
-                          <th>链接</th>
-                          <th>所属资源</th>
-                          <th>类型</th>
-                          <th>状态</th>
-                          <th>操作</th>
+                            <th data-column-id="resourceId" data-type="numeric">ID</th>
+                            <th data-column-id="resourceName">名称</th>
+                            <th data-column-id="resourcePath">链接</th>
+                            <th data-column-id="parentId"  data-order="desc">所属资源</th>
+                            <th data-column-id="received">操作</th>
+                            <th data-column-id="commands" data-formatter="commands" data-sortable="false">操作</th>
                         </tr>
-                      </thead>
-                      <tbody>
-						<c:forEach items="${resources}" var="item" varStatus="status">
-                        <tr>
-                          <td align="center">${status.index+1}</td>
-                          <td>${item.resourceName}</td>
-                          <td>${item.resourcePath}</td>
-                          <td>${item.parentId}</td>
-                          <td>
-                          	<c:if test="${item.resourceType == '0'}">菜单</c:if>
-                          	<c:if test="${item.resourceType == '1'}">按钮</c:if>
-                          </td>
-                          <td><span class="label ${item.enabled=='1'?'label-success':'label-default' }">Active</span></td>
-                          <td>
-                              <button class="btn btn-xs btn-success" data-id='${item.resourceId}'><i class="icon-ok"></i> </button>
-                              <button class="btn btn-xs btn-warning"  data-id='${item.resourceId}' data-target="#myModal"  data-opt="modify"><i class="icon-pencil"></i> </button>
-                              <button class="btn btn-xs btn-danger"  data-id='${item.resourceId}'><i class="icon-remove"></i> </button>
-                          </td>
-                        </tr>
-						</c:forEach>
-                      </tbody>
-                    </table>
-                    <div class="widget-foot">
+                    </thead>
+                </table>
+                  </div>
+                    <!-- <div class="widget-footer">
                         <ul class="pagination pull-right">
                           <li><a href="#">Prev</a></li>
                           <li><a href="#">1</a></li>
@@ -103,8 +95,7 @@
                           <li><a href="#">Next</a></li>
                         </ul>
                       <div class="clearfix"></div> 
-                    </div>
-                  </div>
+                    </div> -->
                 </div>
               </div>
             </div>
@@ -182,6 +173,7 @@
 <script>
 var menuPos = 2;
 $(function(){
+	init();
 	loadResources();
 	$("#myModal").on("hidden.bs.modal", function() { 
 		//$(this).removeData("bs.modal");
@@ -265,6 +257,32 @@ function submit(){
 				loadResources();
 			}
 		}
+	});
+}
+function init(){
+	var grid = $("#grid-resources").bootgrid({
+        //navigation: 1,
+	    ajax: true,
+		dataType:"json",
+	    post: function (){
+	        return {
+	            id: "0"
+	        };
+	    },
+	    url: "resource/list",
+	    formatters: {
+	        "commands": function(column, row) {
+	            return "<button type=\"button\" class=\"btn btn-xs btn-warning command-edit\" data-row-id=\"" + row.resourceId + "\"><i class=\"icon-pencil\"></i></button> " + 
+	                "<button type=\"button\" class=\"btn btn-xs btn-danger command-delete\" data-row-id=\"" + row.resourceId + "\"><i class=\"icon-remove\"></i> </button>";
+	        }
+	    }
+	}).on("loaded.rs.jquery.bootgrid", function(){
+	    /* Executes after data is loaded and rendered */
+	    grid.find(".command-edit").on("click", function(e){
+	        alert("You pressed edit on row: " + $(this).data("row-id"));
+	    }).end().find(".command-delete").on("click", function(e){
+	        alert("You pressed delete on row: " + $(this).data("row-id"));
+	    });
 	});
 }
 </script>

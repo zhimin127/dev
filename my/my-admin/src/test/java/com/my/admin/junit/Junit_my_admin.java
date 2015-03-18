@@ -59,8 +59,7 @@ public class Junit_my_admin {
 	public void updateResources() {
 		String id ="75129c20-0647-47c9-b467-55be876aebc9";
 		SysResources resource = sysResourceService.getById(id );
-		resource.setResourceName("系统");
-		logger.info(GsonUtil.toJson(resource));
+		resource.setResourceName("系统111");
 		sysResourceService.update(resource );
 		resource = sysResourceService.getById(id );
 		logger.info(GsonUtil.toJson(resource));

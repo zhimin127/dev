@@ -42,12 +42,12 @@ public class ResourceController {
 		// SecurityContextHolder.getContext().getAuthentication();
 		// SysRoles role = (SysRoles)
 		// request.getSession().getAttribute(Constants.CURRENT_ROLE);
-		SysResource resource = new SysResource();
+		/*SysResource resource = new SysResource();
 		//resource.setIsSys("0");
 		List<SysResources> resources = sysResourceService.getPageByT(resource, pageNum, pageSize);
 		PageInfo<SysResources> pageView = new PageInfo<SysResources>(resources);
 		pageView.setPageNum(pageNum);
-		model.addAttribute("resources", resources);
+		model.addAttribute("resources", resources);*/
 		return new ModelAndView("resource");
 	}
 
@@ -79,6 +79,22 @@ public class ResourceController {
 		result = new HashMap<String, Object>();
 		result.put("ok", true);
 		result.put("resource", resource);
+		return result;
+	}
+
+	@RequestMapping(value = "list")
+	public Map<String, Object> list(Model model, HttpServletRequest request) {
+		result = new HashMap<String, Object>();
+		SysResource resource = new SysResource();
+		//resource.setIsSys("0");
+		List<SysResources> resources = sysResourceService.getPageByT(resource, pageNum, pageSize);
+		PageInfo<SysResources> pageView = new PageInfo<SysResources>(resources);
+		pageView.setPageNum(pageNum);
+		result.put("ok", true);
+		result.put("current", pageView.getPageNum());
+		result.put("rowCount", pageView.getPageSize());
+		result.put("rows", resources);
+		result.put("total", pageView.getTotal());
 		return result;
 	}
 
