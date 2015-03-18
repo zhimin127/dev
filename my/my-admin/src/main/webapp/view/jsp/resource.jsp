@@ -20,6 +20,9 @@
 .bootgrid-header, .bootgrid-footer {
   margin: 10px 0;
 }
+.bootgrid-header .opts {
+ 	float: left;
+}
 .bootgrid-footer .paginationBar{
 	text-align: right;
 }
@@ -275,7 +278,9 @@ function init(){
 	            return "<button type=\"button\" class=\"btn btn-xs btn-warning command-edit\" data-row-id=\"" + row.resourceId + "\"><i class=\"icon-pencil\"></i></button> " + 
 	                "<button type=\"button\" class=\"btn btn-xs btn-danger command-delete\" data-row-id=\"" + row.resourceId + "\"><i class=\"icon-remove\"></i> </button>";
 	        }
-	    }
+	    },
+	    css:{opts:"opts btn-group"},
+	    templates: {}
 	}).on("loaded.rs.jquery.bootgrid", function(){
 	    /* Executes after data is loaded and rendered */
 	    grid.find(".command-edit").on("click", function(e){

@@ -312,14 +312,18 @@
             var css = this.options.css,
                 selector = getCssSelector(css.actions),
                 headerActions = this.header.find(selector),
+                optSelector = getCssSelector(css.opts),
+                optActions = this.header.find(optSelector),
                 footerActions = this.footer.find(selector);
-
-            if ((headerActions.length + footerActions.length) > 0)
+            	
+            if ((optActions.length + headerActions.length + footerActions.length) > 0)
             {
                 var that = this,
                     tpl = this.options.templates,
                     actions = $(tpl.actions.resolve(getParams.call(this)));
-
+                var opts = $(tpl.opts.resolve(getParams.call(this))); 
+                var btn = $(tpl.actionButton.resolve(getParams.call(this,{ css:"btn-primary",content: "添加资源", text: "22" })));
+				opts.append(btn);
                 // Refresh Button
                 if (this.options.ajax)
                 {
@@ -343,6 +347,7 @@
                 renderColumnSelection.call(this, actions);
 
                 replacePlaceHolder.call(this, headerActions, actions, 1);
+                replacePlaceHolder.call(this, optActions, opts, 1);
                 replacePlaceHolder.call(this, footerActions, actions, 2);
             }
         }
@@ -1201,15 +1206,16 @@
          * @for defaults
          **/
         templates: {
-            actionButton: "<button class=\"btn btn-default\" type=\"button\" title=\"{{ctx.text}}\">{{ctx.content}}</button>",
+            actionButton: "<button class=\"btn btn-default {{ctx.css}}\" type=\"button\" title=\"{{ctx.text}}\">{{ctx.content}}</button>",
             actionDropDown: "<div class=\"{{css.dropDownMenu}}\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\"><span class=\"{{css.dropDownMenuText}}\">{{ctx.content}}</span> <span class=\"caret\"></span></button><ul class=\"{{css.dropDownMenuItems}}\" role=\"menu\"></ul></div>",
             actionDropDownItem: "<li><a href=\"{{ctx.uri}}\" class=\"{{css.dropDownItem}} {{css.dropDownItemButton}}\">{{ctx.text}}</a></li>",
             actionDropDownCheckboxItem: "<li><label class=\"{{css.dropDownItem}}\"><input name=\"{{ctx.name}}\" type=\"checkbox\" value=\"1\" class=\"{{css.dropDownItemCheckbox}}\" {{ctx.checked}} /> {{ctx.label}}</label></li>",
             actions: "<div class=\"{{css.actions}}\"></div>",
+            opts: "<div class=\"{{css.opts}}\"></div>",
             body: "<tbody></tbody>",
             cell: "<td class=\"{{ctx.css}}\">{{ctx.content}}</td>",
             footer: "<div id=\"{{ctx.id}}\" class=\"{{css.footer}}\"><div class=\"row\"><div class=\"col-sm-12 paginationBar\"><p class=\"{{css.pagination}}\"></p></div><div class=\"col-sm-6 infoBar\"><p class=\"{{css.infos}}\"></p></div></div></div>",
-            header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div class=\"col-sm-12 actionBar\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p></div></div></div>",
+            header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div class=\"col-sm-12 actionBar\"><p class=\"{{css.opts}}\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p></div></div></div>",
             headerCell: "<th data-column-id=\"{{ctx.column.id}}\" class=\"{{ctx.css}}\"><a href=\"javascript:void(0);\" class=\"{{css.columnHeaderAnchor}} {{ctx.sortable}}\"><span class=\"{{css.columnHeaderText}}\">{{ctx.column.text}}</span>{{ctx.icon}}</a></th>",
             icon: "<span class=\"{{css.icon}} {{ctx.iconCss}}\"></span>",
             infos: '',//"<div class=\"{{css.infos}}\">{{lbl.infos}}</div>",
