@@ -63,7 +63,7 @@
                     <table class="table table-striped table-bordered table-hover">
                       <thead>
                         <tr>
-                          <th>序号</th>
+                          <th>#</th>
                           <th>名称</th>
                           <th>链接</th>
                           <th>所属资源</th>
@@ -108,7 +108,6 @@
                 </div>
               </div>
             </div>
-            
         </div>
 		  </div>
 		<!-- Matter ends -->
@@ -121,8 +120,7 @@
    <div class="modal-dialog">
       <div class="modal-content">
          <div class="modal-header">
-            <button type="button" class="close" 
-               data-dismiss="modal" aria-hidden="true">
+            <button type="button" class="close"  data-dismiss="modal" aria-hidden="true">
                   &times;
             </button>
             <h4 class="modal-title" id="myModalLabel">
@@ -130,9 +128,9 @@
             </h4>
          </div>
          <div class="modal-body">
-            
                     <!-- Form starts.  -->
                      <form class="form-horizontal" role="form" action="resource/create" method="post" id="resouceForm">
+                                <input type="hidden"  name="resourceId" value="">
                                 <div class="form-group">
                                   <label class="col-lg-4 control-label">名称</label>
                                   <div class="col-lg-8">
@@ -140,9 +138,16 @@
                                   </div>
                                 </div>
                                 <div class="form-group">
+                                  <label class="col-lg-4 control-label">父资源</label>
+                                  <div class="col-lg-8">
+                                    <select class="form-control" name="parentId" id="parentId">
+                                    </select>
+                                  </div>
+                                </div>    
+                                <div class="form-group">
                                   <label class="col-lg-4 control-label">类型</label>
                                   <div class="col-lg-8">
-                                    <select class="form-control" name="resourceType">
+                                    <select class="form-control" name="resourceType" id="resourceType">
                                       <option value="0">菜单</option>
                                       <option value="1">按钮</option>
                                     </select>
@@ -160,45 +165,11 @@
                                     <textarea class="form-control" rows="3" placeholder="描述" name="resourceDesc"></textarea>
                                   </div>
                                 </div>    
-                                <div class="form-group">
-                                  <label class="col-lg-4 control-label">Checkbox</label>
-                                  <div class="col-lg-8">
-                                    <label class="checkbox-inline">
-                                      <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
-                                    </label>
-                                    <label class="checkbox-inline">
-                                      <input type="checkbox" id="inlineCheckbox2" value="option2"> 2
-                                    </label>
-                                    <label class="checkbox-inline">
-                                      <input type="checkbox" id="inlineCheckbox3" value="option3"> 3
-                                    </label>
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <label class="col-lg-4 control-label">Radio Box</label>
-                                  <div class="col-lg-8">
-                                    <div class="radio">
-                                      <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                                        Option one is this and that&mdash;be sure to include why it's great
-                                      </label>
-                                    </div>
-                                    <div class="radio">
-                                      <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                        Option two can be something else and selecting it will deselect option one
-                                      </label>
-                                    </div>
-                                  </div>
-                                </div>
                               </form>
          </div>
          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-            </button>
-            <button type="button" class="btn btn-primary">
-               提交更改
-            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn btn-primary submit" data-target="#myModal">提交更改</button>
          </div>
       </div><!-- /.modal-content -->
 </div><!-- /.modal --></div>
@@ -211,7 +182,11 @@
 <script>
 var menuPos = 2;
 $(function(){
-	//$("#myModal").on("hidden.bs.modal", function() { $(this).removeData("bs.modal"); });
+	loadResources();
+	$("#myModal").on("hidden.bs.modal", function() { 
+		//$(this).removeData("bs.modal");
+		$(this).find("form")[0].reset();
+	});
 	$('#myModal').on('show.bs.modal', function () {
 		var _self = $(this);
 		/* $(this).find('.modal-dialog').css({  
@@ -226,6 +201,7 @@ $(function(){
 	    }); */
 	})
 	$('.widget .btn').click(modify);
+	$('.modal .submit').click(submit);
 });
 function modify(){
 	var id = $(this).attr("data-id");
@@ -238,6 +214,7 @@ function modify(){
 			success:function(data){
 				if(data.ok){
 					var res = data.resource;
+					$("input[name='resourceId']").val(res.resourceId);
 					$("input[name='resourceName']").val(res.resourceName);
 					$("input[name='resourcePath']").val(res.resourcePath);
 				}
@@ -246,6 +223,49 @@ function modify(){
 		//$("#resouceForm").form("load","resouce/info?id="+id);
 		$(target).modal('show');
 	}
+}
+function loadResources(){
+	$("#parentId").load("nav",function(data){
+		data = eval('(' + data + ')');
+		var option = "";
+		$(this).html("");
+		//$(this).append("<option value=''>请选择</option>");
+		for(i=0;i<data.menus.length;i++){
+			var menu = data.menus[i];
+			$(this).append("<option value='"+menu.resourceId+"'> -- "+menu.resourceName+" -- </option>");
+			var subMenu = initSubMenu(menu.subResources);
+			$(this).append(subMenu);
+		}
+	});
+}
+function  initSubMenu(menus){
+	var result = "";
+	if(menus.length>0){
+		for(i=0;i<menus.length;i++){
+			var menu = menus[i];
+			result += ("<option value='"+menu.resourceId+"'> &nbsp;&nbsp;&nbsp;&nbsp;"+menu.resourceName+" </option>");
+			var subMenu = initSubMenu(menu.subResources);
+			result +=subMenu;
+		}
+	}
+	return result;
+}
+function submit(){
+	var id = $(this).attr("data-target")
+	var modal = $(id);
+	var form = modal.find("form");
+	$.ajax({
+		type: 'POST',
+		url: "resource/create",
+		dataType:"json",
+		data: form.serializeArray(),
+		success:function(data){
+			if(data.ok){
+				modal.modal("hide");
+				loadResources();
+			}
+		}
+	});
 }
 </script>
 </body>

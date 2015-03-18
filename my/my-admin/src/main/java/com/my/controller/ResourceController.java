@@ -3,10 +3,12 @@ package com.my.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.my.core.common.model.SysResources;
@@ -60,7 +62,14 @@ public class ResourceController {
 		result = new HashMap<String, Object>();
 		// Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		//SysRoles role = (SysRoles) request.getSession().getAttribute(Constants.CURRENT_ROLE);
-		
+		boolean ok = true;
+		if(StringUtils.isBlank(resource.getResourceId())&&StringUtils.isNotBlank(resource.getResourceName())){
+			resource.setResourceId(UUID.randomUUID().toString());
+			sysResourceService.save(resource);
+		}else{
+			sysResourceService.update(resource);
+		}
+		result.put("ok", ok);
 		return result;
 	}
 

@@ -25,6 +25,11 @@ public class SysResourceServiceImpl implements SysResourceService {
 		sysResourcesMapper.insert(resource);
 	}
 
+	@Override
+	public void update(SysResources resource) {
+		sysResourcesMapper.updateByPrimaryKeySelective(resource);
+	}
+
 	public List<SysResources> getAll() {
 		return sysResourcesMapper.selectByExample(null);
 	}
@@ -61,16 +66,16 @@ public class SysResourceServiceImpl implements SysResourceService {
 
 	public List<SysResources> getPageByT(SysResource resource, int page, int pageSize) {
 		SysResourcesExample example = new SysResourcesExample();
-		Criteria criteria =example.createCriteria();
-		if(StringUtils.isNotBlank(resource.getIsSys())){
+		Criteria criteria = example.createCriteria();
+		if (StringUtils.isNotBlank(resource.getIsSys())) {
 			criteria.andIsSysEqualTo(resource.getIsSys());
 		}
-		if(StringUtils.isNotBlank(resource.getResourceType())){
+		if (StringUtils.isNotBlank(resource.getResourceType())) {
 			criteria.andIsSysEqualTo(resource.getResourceType());
 		}
-		List<SysResources> list =  sysResourcesMapper.selectByExample(example);
-		for(SysResources res:list){
-			if(StringUtils.isNotBlank(res.getParentId())){
+		List<SysResources> list = sysResourcesMapper.selectByExample(example);
+		for (SysResources res : list) {
+			if (StringUtils.isNotBlank(res.getParentId())) {
 				SysResources pres = sysResourcesMapper.selectByPrimaryKey(res.getParentId());
 				res.setParentId(pres.getResourceName());
 			}
@@ -82,4 +87,5 @@ public class SysResourceServiceImpl implements SysResourceService {
 	public SysResources getById(String id) {
 		return sysResourcesMapper.selectByPrimaryKey(id);
 	}
+
 }

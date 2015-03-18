@@ -9,6 +9,8 @@ public interface SysResourceService {
 
 	void save(SysResources resource);
 
+	void update(SysResources resource);
+
 	SysResources getById(String id);
 	
 	List<SysResources> getAll();

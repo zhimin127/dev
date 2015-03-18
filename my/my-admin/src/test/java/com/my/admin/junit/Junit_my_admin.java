@@ -7,6 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.my.app.service.UserService;
+import org.my.core.common.model.SysResources;
 import org.my.core.common.model.SysUsers;
 import org.my.core.sys.model.SysResource;
 import org.my.core.util.GsonUtil;
@@ -41,16 +42,27 @@ public class Junit_my_admin {
 	}
 
 	@Autowired
-	private SysResourceService sysResourcesService;
-	@Test
+	private SysResourceService sysResourceService;
+	//@Test
 	public void getResources() {
 		//SysRoles role = sysRoleService.getRoleByName(baseRole[0]);
-		List<SysResource> nav = sysResourcesService.findNavResourceByRoleId("818181ec4ad85c9a014ad85c9ad60000");
+		List<SysResource> nav = sysResourceService.findNavResourceByRoleId("818181ec4ad85c9a014ad85c9ad60000");
 		
 		for(SysResource sub:nav.get(0).getSubResources()){
 			System.out.println(sub.getResourceName()+":" +GsonUtil.toJson(sub.getSubResources()));
 		}
 		//List<SysResource> res = sysResourcesService.getPageByT(null, 0, 2);
 		//logger.info(GsonUtil.toJson(res));
+	}
+	
+	@Test
+	public void updateResources() {
+		String id ="75129c20-0647-47c9-b467-55be876aebc9";
+		SysResources resource = sysResourceService.getById(id );
+		resource.setResourceName("系统");
+		logger.info(GsonUtil.toJson(resource));
+		sysResourceService.update(resource );
+		resource = sysResourceService.getById(id );
+		logger.info(GsonUtil.toJson(resource));
 	}
 }
