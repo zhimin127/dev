@@ -28,4 +28,6 @@ public interface SysResourceService {
 	List<SysResource> findByT(SysResource resource);
 	
 	List<SysResource> findPageByT(SysResource resource, int page, int pageSize);
+
+	List<SysResource> findAllNavMenu();
 }

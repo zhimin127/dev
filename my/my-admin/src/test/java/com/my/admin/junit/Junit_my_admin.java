@@ -43,10 +43,10 @@ public class Junit_my_admin {
 
 	@Autowired
 	private SysResourceService sysResourceService;
-	//@Test
+	@Test
 	public void getResources() {
 		//SysRoles role = sysRoleService.getRoleByName(baseRole[0]);
-		List<SysResource> nav = sysResourceService.findNavResourceByRoleId("818181ec4ad85c9a014ad85c9ad60000");
+		List<SysResource> nav = sysResourceService.findAllNavMenu();
 		
 		for(SysResource sub:nav.get(0).getSubResources()){
 			System.out.println(sub.getResourceName()+":" +GsonUtil.toJson(sub.getSubResources()));
@@ -55,7 +55,7 @@ public class Junit_my_admin {
 		//logger.info(GsonUtil.toJson(res));
 	}
 	
-	@Test
+	//@Test
 	public void updateResources() {
 		String id ="75129c20-0647-47c9-b467-55be876aebc9";
 		SysResources resource = sysResourceService.getById(id );

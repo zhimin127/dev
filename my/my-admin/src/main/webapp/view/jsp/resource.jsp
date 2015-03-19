@@ -20,7 +20,7 @@
 .bootgrid-header, .bootgrid-footer {
   margin: 10px 0;
 }
-.bootgrid-header .opts {
+.bootgrid-header .toolBar {
  	float: left;
 }
 .bootgrid-footer .paginationBar{
@@ -108,6 +108,11 @@
     </div>
    <!-- Mainbar ends -->	    	
    <div class="clearfix"></div>
+ <div class="pull-left" id="toolBar">
+       <button class="btn btn-default" data-target="#myModal"  data-toggle="modal" data-backdrop="static" ><!-- data-remote="resource/create" -->
+          <i class="icon-plus"></i>添加资源
+      </button>
+</div>
    <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
    aria-labelledby="myModalLabel" aria-hidden="true">
@@ -175,9 +180,10 @@
   <%@include file="inc/js.html" %>
 <script>
 var menuPos = 2;
+var resourcesGrid = null;
 $(function(){
-	init();
-	loadResources();
+	resourcesGrid = initGrid();
+	loadResourcesSelect();
 	$("#myModal").on("hidden.bs.modal", function() { 
 		//$(this).removeData("bs.modal");
 		$(this).find("form")[0].reset();
@@ -195,14 +201,9 @@ $(function(){
 	        }  
 	    }); */
 	})
-	$('.widget .btn').click(modify);
 	$('.modal .submit').click(submit);
 });
-function modify(){
-	var id = $(this).attr("data-id");
-	var target = $(this).attr("data-target");
-	var opt  = $(this).attr("data-opt");
-	if(opt == "modify"){
+function info(id){
 		$.ajax({
 			url: "resource/info?id="+id,
 			dataType:"json",
@@ -216,11 +217,11 @@ function modify(){
 			}
 		});
 		//$("#resouceForm").form("load","resouce/info?id="+id);
-		$(target).modal('show');
-	}
+		$("#myModal").modal('show');
 }
-function loadResources(){
-	$("#parentId").load("nav",function(data){
+var level = 0; 
+function loadResourcesSelect(){
+	$("#parentId").load("nav/all",function(data){
 		data = eval('(' + data + ')');
 		var option = "";
 		$(this).html("");
@@ -228,6 +229,7 @@ function loadResources(){
 		for(i=0;i<data.menus.length;i++){
 			var menu = data.menus[i];
 			$(this).append("<option value='"+menu.resourceId+"'> -- "+menu.resourceName+" -- </option>");
+			level = 1;
 			var subMenu = initSubMenu(menu.subResources);
 			$(this).append(subMenu);
 		}
@@ -236,13 +238,21 @@ function loadResources(){
 function  initSubMenu(menus){
 	var result = "";
 	if(menus.length>0){
-		for(i=0;i<menus.length;i++){
+		for(i=0;i<menus.length-1;i++){
 			var menu = menus[i];
-			result += ("<option value='"+menu.resourceId+"'> &nbsp;&nbsp;&nbsp;&nbsp;"+menu.resourceName+" </option>");
-			var subMenu = initSubMenu(menu.subResources);
-			result +=subMenu;
+			var pre = ""
+			for(j = 0;j<level;j++){
+				pre += "&nbsp;&nbsp;&nbsp;&nbsp;";
+			}
+			result += ("<option value='"+menu.resourceId+"'> &nbsp;&nbsp;&nbsp;&nbsp;" + pre +menu.resourceName+" </option>");
+			if(menu.subResources != [] && menu.subResources != "" && menu.subResources != null && menu.subResources.length>0){
+				level ++;
+				var subMenu =  initSubMenu(menu.subResources);
+				result +=subMenu;
+			}
 		}
 	}
+	level --;
 	return result;
 }
 function submit(){
@@ -257,12 +267,13 @@ function submit(){
 		success:function(data){
 			if(data.ok){
 				modal.modal("hide");
-				loadResources();
+				loadResourcesSelect();
+				resourcesGrid.bootgrid('reload');
 			}
 		}
 	});
 }
-function init(){
+function initGrid(){
 	var grid = $("#grid-resources").bootgrid({
         //navigation: 1,
 	    ajax: true,
@@ -279,16 +290,17 @@ function init(){
 	                "<button type=\"button\" class=\"btn btn-xs btn-danger command-delete\" data-row-id=\"" + row.resourceId + "\"><i class=\"icon-remove\"></i> </button>";
 	        }
 	    },
-	    css:{opts:"opts btn-group"},
-	    templates: {}
+	    toolbar:"#toolBar"
 	}).on("loaded.rs.jquery.bootgrid", function(){
 	    /* Executes after data is loaded and rendered */
 	    grid.find(".command-edit").on("click", function(e){
-	        alert("You pressed edit on row: " + $(this).data("row-id"));
+	        //alert("You pressed edit on row: " + $(this).data("row-id"));
+	        info($(this).data("row-id"));
 	    }).end().find(".command-delete").on("click", function(e){
 	        alert("You pressed delete on row: " + $(this).data("row-id"));
 	    });
 	});
+	return grid;
 }
 </script>
 </body>

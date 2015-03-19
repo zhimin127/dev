@@ -74,6 +74,7 @@
         loadRows.call(this); // Loads rows from HTML tbody tag if ajax is false
         prepareTable.call(this);
         renderTableHeader.call(this);
+        renderToolbar.call(this);
         renderSearchField.call(this);
         renderActions.call(this);
         loadData.call(this);
@@ -312,18 +313,13 @@
             var css = this.options.css,
                 selector = getCssSelector(css.actions),
                 headerActions = this.header.find(selector),
-                optSelector = getCssSelector(css.opts),
-                optActions = this.header.find(optSelector),
                 footerActions = this.footer.find(selector);
             	
-            if ((optActions.length + headerActions.length + footerActions.length) > 0)
+            if ((headerActions.length + footerActions.length) > 0)
             {
                 var that = this,
                     tpl = this.options.templates,
                     actions = $(tpl.actions.resolve(getParams.call(this)));
-                var opts = $(tpl.opts.resolve(getParams.call(this))); 
-                var btn = $(tpl.actionButton.resolve(getParams.call(this,{ css:"btn-primary",content: "添加资源", text: "22" })));
-				opts.append(btn);
                 // Refresh Button
                 if (this.options.ajax)
                 {
@@ -345,9 +341,8 @@
 
                 // Column selection
                 renderColumnSelection.call(this, actions);
-
+                
                 replacePlaceHolder.call(this, headerActions, actions, 1);
-                replacePlaceHolder.call(this, optActions, opts, 1);
                 replacePlaceHolder.call(this, footerActions, actions, 2);
             }
         }
@@ -688,6 +683,54 @@
             });
     }
 
+    function renderToolbar()
+    {
+        if (this.options.navigation !== 0)
+        {
+            var css = this.options.css,
+                selector = getCssSelector(css.toolbar),
+                headerToolbar = this.header.find(selector),
+                footerToolbar = this.footer.find(selector);
+
+            if ((headerToolbar.length + footerToolbar.length) > 0)
+            {
+                var that = this,
+                    tpl = this.options.templates,
+                    timer = null, // fast keyup detection
+                    currentValue = "",
+                    searchFieldSelector = getCssSelector(css.searchField),
+                    toolbar = null;
+                if(!(this.options.toolbar instanceof Array)){
+                	toolbar = $(this.options.toolbar);
+                	if(toolbar == "undefined"){
+                		toolbar = $(tpl.actions.resolve(getParams.call(this)));
+                	}else{
+                	}
+                    $(this.options.toolbar).remove();
+                }else{
+                    var btn = $(tpl.actionButton.resolve(getParams.call(this,{ css:"btn-primary",content: "添加资源", text: "22" })));
+                    btn.on("keyup" + namespace, function (e)
+                    {
+                        e.stopPropagation();
+                        var newValue = $(this).val();
+                        if (currentValue !== newValue)
+                        {
+                            currentValue = newValue;
+                            window.clearTimeout(timer);
+                            timer = window.setTimeout(function ()
+                            {
+                                that.search(newValue);
+                            }, 250);
+                        }
+                    });
+    				//opts.append(btn);
+                }
+                replacePlaceHolder.call(this, headerToolbar, toolbar, 1);
+                replacePlaceHolder.call(this, footerToolbar, toolbar, 2);
+            }
+        }
+    }
+    
     function renderSearchField()
     {
         if (this.options.navigation !== 0)
@@ -977,6 +1020,7 @@
      *   $("#bootgrid").bootgrid({ selection = true });
      **/
     Grid.defaults = {
+    	toolbar: "",
         navigation: 3, // it's a flag: 0 = none, 1 = top, 2 = bottom, 3 = both (top and bottom)
         padding: 2, // page padding (pagination)
         columnSelection: true,
@@ -1118,6 +1162,7 @@
          * @for defaults
          **/
         css: {
+            toolbar: "toolbar btn-group", 
             actions: "actions btn-group", // must be a unique class name or constellation of class names within the header and footer
             center: "text-center",
             columnHeaderAnchor: "column-header-anchor", // must be a unique class name or constellation of class names within the column header cell
@@ -1211,11 +1256,10 @@
             actionDropDownItem: "<li><a href=\"{{ctx.uri}}\" class=\"{{css.dropDownItem}} {{css.dropDownItemButton}}\">{{ctx.text}}</a></li>",
             actionDropDownCheckboxItem: "<li><label class=\"{{css.dropDownItem}}\"><input name=\"{{ctx.name}}\" type=\"checkbox\" value=\"1\" class=\"{{css.dropDownItemCheckbox}}\" {{ctx.checked}} /> {{ctx.label}}</label></li>",
             actions: "<div class=\"{{css.actions}}\"></div>",
-            opts: "<div class=\"{{css.opts}}\"></div>",
             body: "<tbody></tbody>",
             cell: "<td class=\"{{ctx.css}}\">{{ctx.content}}</td>",
             footer: "<div id=\"{{ctx.id}}\" class=\"{{css.footer}}\"><div class=\"row\"><div class=\"col-sm-12 paginationBar\"><p class=\"{{css.pagination}}\"></p></div><div class=\"col-sm-6 infoBar\"><p class=\"{{css.infos}}\"></p></div></div></div>",
-            header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div class=\"col-sm-12 actionBar\"><p class=\"{{css.opts}}\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p></div></div></div>",
+            header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div class=\"col-sm-12 actionBar\"><p class=\"{{css.toolbar}}\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p></div></div></div>",
             headerCell: "<th data-column-id=\"{{ctx.column.id}}\" class=\"{{ctx.css}}\"><a href=\"javascript:void(0);\" class=\"{{css.columnHeaderAnchor}} {{ctx.sortable}}\"><span class=\"{{css.columnHeaderText}}\">{{ctx.column.text}}</span>{{ctx.icon}}</a></th>",
             icon: "<span class=\"{{css.icon}} {{ctx.iconCss}}\"></span>",
             infos: '',//"<div class=\"{{css.infos}}\">{{lbl.infos}}</div>",

@@ -27,12 +27,20 @@ public class MenuController {
 	private Map<String, Object> result;
 
 	@RequestMapping("nav")
-	public Map<String, Object> login(HttpServletRequest request) {
+	public Map<String, Object> nav(HttpServletRequest request) {
 		result = new HashMap<String, Object>();
 		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		SysRoles role = (SysRoles) request.getSession().getAttribute(Constants.CURRENT_ROLE);
 		List<SysResource> nav = sysResourceService.findNavResourceByRoleId(role.getRoleId());
 		result.put("menus", nav);
+		return result;
+	}
+
+	@RequestMapping("nav/all")
+	public Map<String, Object> allNav(HttpServletRequest request) {
+		result = new HashMap<String, Object>();
+		List<SysResource> allNav = sysResourceService.findAllNavMenu();
+		result.put("menus", allNav);
 		return result;
 	}
 

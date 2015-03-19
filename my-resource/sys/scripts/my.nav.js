@@ -59,7 +59,7 @@ function initMacSidebar(){
 					subMenu += '<ul>'
 				}
 				jQuery.each(n.subResources, function(j, o) {
-					subMenu += '<li><a ref="' + o.id + '" href="' + o.resourcePath + '" rel="" ><span class="">' + o.resourceName + '</span></a></li>';
+					subMenu += '<li><a ref="' + o.id + '" href="' + o.resourcePath.substring(1) + '" rel="" ><span class="">' + o.resourceName + '</span></a></li>';
 				})
 				subMenu += '</ul>';
 			}

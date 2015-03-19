@@ -15,6 +15,8 @@ public class SysResource extends SysResources {
 	private List<SysStyles> styles;
 	
 	private List<SysResource> subResources;
+	
+	private List<SysResource> children;
 
 	public List<SysResource> getSubResources() {
 		return subResources;
@@ -46,5 +48,13 @@ public class SysResource extends SysResources {
 
 	public void setRoleId(String roleId) {
 		this.roleId = roleId;
+	}
+
+	public List<SysResource> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<SysResource> children) {
+		this.children = children;
 	}
 }

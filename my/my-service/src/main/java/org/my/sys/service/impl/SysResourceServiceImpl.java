@@ -88,4 +88,9 @@ public class SysResourceServiceImpl implements SysResourceService {
 		return sysResourcesMapper.selectByPrimaryKey(id);
 	}
 
+	@Override
+	public List<SysResource> findAllNavMenu() {
+		return sysResourceDao.findAllNav();
+	}
+
 }

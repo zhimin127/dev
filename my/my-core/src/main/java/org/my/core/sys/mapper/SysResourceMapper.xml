@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="SysResourceMapper">
 
-	<resultMap id="ResourceResultMap" type="org.my.core.sys.model.SysResource" extends="org.my.core.common.dao.SysResourcesMapper.BaseResultMap">
+	<resultMap id="RoleResourceResultMap" type="org.my.core.sys.model.SysResource" extends="org.my.core.common.dao.SysResourcesMapper.BaseResultMap">
 		<result column="ROLE_ID" property="roleId" jdbcType="VARCHAR" />
 		<collection property="subResources" javaType="ArrayList" column="{resourceId=RESOURCE_ID,resourceType=RESOURCE_TYPE,roleId=ROLE_ID}" select="findSubResources" />
 		<collection property="styles" javaType="ArrayList" column="RESOURCE_ID" select="SysStyleMapper.findByResourceId" /> 
@@ -10,6 +10,10 @@
 
 	<resultMap id="AuthResourceResultMap" type="org.my.core.sys.model.SysResource" extends="org.my.core.common.dao.SysResourcesMapper.BaseResultMap">
 		<collection property="roles" javaType="ArrayList" column="RESOURCE_ID" select="SysRoleMapper.findByResourceId" />
+	</resultMap>
+	
+	<resultMap id="NavResourceResultMap" type="org.my.core.sys.model.SysResource" extends="org.my.core.common.dao.SysResourcesMapper.BaseResultMap">
+		<collection property="subResources" javaType="ArrayList" column="{resourceId=RESOURCE_ID,resourceType=RESOURCE_TYPE}" select="findSubNavResources" />
 	</resultMap>
 
 	<select id="findAllAuth" resultMap="AuthResourceResultMap">
@@ -39,8 +43,8 @@
 		</if>
 		</where>
 	</select>
-
-	<select id="findNavResourceByRoleId" resultMap="ResourceResultMap" parameterType="java.lang.String">
+<!-- findNavResourceByRoleId start -->
+	<select id="findNavResourceByRoleId" resultMap="RoleResourceResultMap" parameterType="java.lang.String">
 		SELECT
 		t1.RESOURCE_ID,
 		t1.RESOURCE_TYPE,
@@ -62,7 +66,7 @@
 		t2.ROLE_ID = #{roleId}
 	</select>
 
-	<select id="findSubResources" parameterType="HashMap" resultMap="ResourceResultMap">
+	<select id="findSubResources" parameterType="HashMap" resultMap="RoleResourceResultMap">
 		SELECT
 		t1.RESOURCE_ID,
 		t1.RESOURCE_TYPE,
@@ -84,8 +88,49 @@
 		t1.PARENT_ID = #{resourceId}
 		AND
 		t1.RESOURCE_TYPE = #{resourceType}
+		<if test="roleId !=null">
 		AND
 		t2.ROLE_ID = #{roleId}
+		</if>
 	</select>
-
+<!-- findNavResourceByRoleId end -->
+<!-- findAllNav start -->
+	<select id="findAllNav" resultMap="NavResourceResultMap" parameterType="java.lang.String">
+		SELECT
+		t1.RESOURCE_ID,
+		t1.RESOURCE_TYPE,
+		t1.RESOURCE_NAME,
+		t1.RESOURCE_DESC,
+		t1.RESOURCE_PATH,
+		t1.PRIORITY,
+		t1.ENABLED,
+		t1.IS_SYS,
+		t1.MODULE_ID
+		FROM
+		sys_resources t1
+		WHERE
+		t1.RESOURCE_TYPE = '0'
+		AND
+		t1.PRIORITY = 0
+	</select>
+	
+	<select id="findSubNavResources" parameterType="HashMap" resultMap="NavResourceResultMap">
+		SELECT
+		t1.RESOURCE_ID,
+		t1.RESOURCE_TYPE,
+		t1.RESOURCE_NAME,
+		t1.RESOURCE_DESC,
+		t1.RESOURCE_PATH,
+		t1.PRIORITY,
+		t1.ENABLED,
+		t1.IS_SYS,
+		t1.MODULE_ID
+		FROM
+		sys_resources t1
+		WHERE
+		t1.PARENT_ID = #{resourceId}
+		AND
+		t1.RESOURCE_TYPE = #{resourceType}
+	</select>
+<!-- findAllNav start -->
 </mapper>
