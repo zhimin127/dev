@@ -26,7 +26,7 @@ public class UserAssemblerRolesServiceImpl implements UserAssemblerRolesService 
 
 		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		for (SysRoles role : userAccount.getRoles()) {
-			authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
+			authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
 		}
 
 		return new User(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);

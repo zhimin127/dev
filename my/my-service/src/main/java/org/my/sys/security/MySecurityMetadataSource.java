@@ -61,10 +61,10 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
 			for (SysResource resource : resources) {
 				Collection<ConfigAttribute> configAttributes = new ArrayList<ConfigAttribute>();
 				for (SysRoles role : resource.getRoles()) {
-					ConfigAttribute configAttribute = new SecurityConfig("ROLE_" + role.getRoleName());
+					ConfigAttribute configAttribute = new SecurityConfig("ROLE_" + role.getName());
 					configAttributes.add(configAttribute);
 				}
-				resourceMap.put(resource.getResourcePath(), configAttributes);
+				resourceMap.put(resource.getUrl(), configAttributes);
 			}
 			logger.info("资源[ " + resourceMap + " ]");
 		}

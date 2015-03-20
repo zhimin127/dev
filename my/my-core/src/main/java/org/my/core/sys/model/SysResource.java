@@ -7,31 +7,19 @@ import org.my.core.common.model.SysRoles;
 import org.my.core.common.model.SysStyles;
 
 public class SysResource extends SysResources {
-	
-	private String roleId;
 
+	private Integer roleId;
+	private SysStyles style;
+	private SysResources parent;
 	private List<SysRoles> roles;
-	
-	private List<SysStyles> styles;
-	
-	private List<SysResource> subResources;
-	
 	private List<SysResource> children;
 
-	public List<SysResource> getSubResources() {
-		return subResources;
+	public SysStyles getStyle() {
+		return style;
 	}
 
-	public void setSubResources(List<SysResource> subResources) {
-		this.subResources = subResources;
-	}
-
-	public List<SysStyles> getStyles() {
-		return styles;
-	}
-
-	public void setStyles(List<SysStyles> styles) {
-		this.styles = styles;
+	public void setStyle(SysStyles style) {
+		this.style = style;
 	}
 
 	public List<SysRoles> getRoles() {
@@ -42,11 +30,11 @@ public class SysResource extends SysResources {
 		this.roles = roles;
 	}
 
-	public String getRoleId() {
+	public Integer getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId(String roleId) {
+	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
 
@@ -56,5 +44,20 @@ public class SysResource extends SysResources {
 
 	public void setChildren(List<SysResource> children) {
 		this.children = children;
+	}
+
+	public SysResources getParent() {
+		return parent;
+	}
+
+	public void setParent(SysResources parent) {
+		this.parent = parent;
+	}
+
+	public String getParentName() {
+		if (parent != null) {
+			return parent.getName();
+		}
+		return null;
 	}
 }

@@ -21,20 +21,20 @@ function getMenus(){
 function initMacSidebar(){
 	sidebar = jQuery(".sidebar");
 	if (typeof _menus != 'undefined') {
-		var title = "<div class='sidebar-dropdown'><a href='#'>" + _menus.resourceName + "</a></div>";
+		var title = "<div class='sidebar-dropdown'><a href='#'>" + _menus.name + "</a></div>";
 		var nav = '<ul id="nav">';
 		
-		jQuery.each(_menus.subResources, function(i, n) {
-			var style_class = getStyle(n.styles,"styleClass");
-			if(n.subResources.length > 0){
+		jQuery.each(_menus.children, function(i, n) {
+			var style_class = n.style.css;
+			if(n.children.length > 0){
 				style_class += " has_sub";
 			}
 			var menu = '<li class="' + style_class + '">';
-			/*if (!isNotBlank(n.resourcePath)) {
-				menu += n.resourceName;
+			/*if (!isNotBlank(n.Path)) {
+				menu += n.Name;
 			} else */{
-				var url =  n.resourcePath;
-				if(!isNotBlank(n.resourcePath) || n.resourcePath == "#") {
+				var url =  n.url;
+				if(!isNotBlank(n.url) || n.url == "#") {
 					url = 'javascript:void(0);'
 				}else{
 					url = url.substring(1);
@@ -44,22 +44,22 @@ function initMacSidebar(){
 					_class = ' class="open"'
 				}
 				menu += '<a href="' + url + '"'+_class+'>';
-				var icon = getStyle(n.styles,"iconName");
+				var icon = n.style.iconCss;
 				if (isNotBlank(icon)) {
 					menu += '<i class="' + icon + '"></i>';
 				}
-				menu +=  n.resourceName + '';
+				menu +=  n.name + '';
 			}
 			var subMenu = '</a>';
-			if (n.subResources.length > 0) {
+			if (n.children.length > 0) {
 				subMenu = '<span class="pull-right"><i class="icon-chevron-right"></i></span></a>';
 				if(typeof subMenuPos != 'undefined' && i == menuPos){
 					subMenu += '<ul style="display: block;">';
 				}else{
 					subMenu += '<ul>'
 				}
-				jQuery.each(n.subResources, function(j, o) {
-					subMenu += '<li><a ref="' + o.id + '" href="' + o.resourcePath.substring(1) + '" rel="" ><span class="">' + o.resourceName + '</span></a></li>';
+				jQuery.each(n.children, function(j, o) {
+					subMenu += '<li><a ref="' + o.id + '" href="' + o.url.substring(1) + '" rel="" ><span class="">' + o.name + '</span></a></li>';
 				})
 				subMenu += '</ul>';
 			}

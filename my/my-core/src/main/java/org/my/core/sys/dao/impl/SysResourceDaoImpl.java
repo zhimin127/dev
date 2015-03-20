@@ -19,8 +19,8 @@ public class SysResourceDaoImpl extends BaseDaoImpl<SysResource> implements SysR
 		return getSqlSession().selectList(MapperEnum.SYS_RESOURCE.getMapperName() + ".findAllAuth");
 	}
 
-	public List<SysResource> findNavResourceByRoleId(String roleId) {
-		return getSqlSession().selectList(MapperEnum.SYS_RESOURCE.getMapperName() + ".findNavResourceByRoleId", roleId);
+	public List<SysResource> findNavMenuByRoleId(Integer roleId) {
+		return getSqlSession().selectList(MapperEnum.SYS_RESOURCE.getMapperName() + ".findNavByRoleId", roleId);
 	}
 
 	@Override

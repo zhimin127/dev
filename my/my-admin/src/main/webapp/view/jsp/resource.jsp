@@ -12,7 +12,7 @@
   <%@include file="inc/css.html" %>
   <style>
   .fade{
- 
+ 	
   }
 #grid-resources tr th{
   border-top:  1px solid #ddd !important;
@@ -78,11 +78,11 @@
                 <table id="grid-resources" class="table table-hover table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th data-column-id="resourceId" data-type="numeric">ID</th>
-                            <th data-column-id="resourceName">名称</th>
-                            <th data-column-id="resourcePath">链接</th>
-                            <th data-column-id="parentId"  data-order="desc">所属资源</th>
-                            <th data-column-id="received">操作</th>
+                            <th data-column-id="id" data-type="numeric">ID</th>
+                            <th data-column-id="name">名称</th>
+                            <th data-column-id="url">链接</th>
+                            <th data-column-id="parentName"  data-order="desc">所属资源</th>
+                            <th data-column-id="received">排序</th>
                             <th data-column-id="commands" data-formatter="commands" data-sortable="false">操作</th>
                         </tr>
                     </thead>
@@ -129,11 +129,11 @@
          <div class="modal-body">
                     <!-- Form starts.  -->
                      <form class="form-horizontal" role="form" action="resource/create" method="post" id="resouceForm">
-                                <input type="hidden"  name="resourceId" value="">
+                                <input type="hidden"  name="id" value="">
                                 <div class="form-group">
                                   <label class="col-lg-4 control-label">菜单名称</label>
                                   <div class="col-lg-8">
-                                    <input type="text" class="form-control" placeholder="菜单名称" name="resourceName">
+                                    <input type="text" class="form-control" placeholder="菜单名称" name="name">
                                   </div>
                                 </div>
                                 <div class="form-group">
@@ -146,7 +146,7 @@
                                 <div class="form-group">
                                   <label class="col-lg-4 control-label">菜单类型</label>
                                   <div class="col-lg-8">
-                                    <select class="form-control" name="resourceType" id="resourceType">
+                                    <select class="form-control" name="type" id="type">
                                       <option value="0">菜单</option>
                                       <option value="1">按钮</option>
                                     </select>
@@ -155,13 +155,13 @@
                                 <div class="form-group">
                                   <label class="col-lg-4 control-label">链接</label>
                                   <div class="col-lg-8">
-                                    <input type="text" class="form-control" placeholder="链接" name="resourcePath">
+                                    <input type="text" class="form-control" placeholder="链接" name="url">
                                   </div>
                                 </div>
                                 <div class="form-group">
                                   <label class="col-lg-4 control-label">描述</label>
                                   <div class="col-lg-8">
-                                    <textarea class="form-control" rows="3" placeholder="描述" name="resourceDesc"></textarea>
+                                    <textarea class="form-control" rows="3" placeholder="描述" name="description"></textarea>
                                   </div>
                                 </div>    
                               </form>
@@ -179,7 +179,7 @@
 <span class="totop"><a href="#"><i class="icon-chevron-up"></i></a></span> 
   <%@include file="inc/js.html" %>
 <script>
-var menuPos = 2;
+var menuPos = 1;
 var resourcesGrid = null;
 $(function(){
 	resourcesGrid = initGrid();
@@ -187,6 +187,7 @@ $(function(){
 	$("#myModal").on("hidden.bs.modal", function() { 
 		//$(this).removeData("bs.modal");
 		$(this).find("form")[0].reset();
+		$("input[name='id']").val('');
 	});
 	$('#myModal').on('show.bs.modal', function () {
 		var _self = $(this);
@@ -210,9 +211,11 @@ function info(id){
 			success:function(data){
 				if(data.ok){
 					var res = data.resource;
-					$("input[name='resourceId']").val(res.resourceId);
-					$("input[name='resourceName']").val(res.resourceName);
-					$("input[name='resourcePath']").val(res.resourcePath);
+					$("input[name='id']").val(res.id);
+					$("input[name='name']").val(res.name);
+					$("input[name='url']").val(res.url);
+					$("select[name='parentId']").val(res.parentId);
+					$("textarea[name='description']").val(res.description);
 				}
 			}
 		});
@@ -228,9 +231,9 @@ function loadResourcesSelect(){
 		//$(this).append("<option value=''>请选择</option>");
 		for(i=0;i<data.menus.length;i++){
 			var menu = data.menus[i];
-			$(this).append("<option value='"+menu.resourceId+"'> ---- 顶层资源 ---- </option>");
+			$(this).append("<option value='"+menu.id+"'> ---- 导航菜单 ---- </option>");
 			level = 1;
-			var subMenu = initSubMenu(menu.subResources);
+			var subMenu = initSubMenu(menu.children);
 			$(this).append(subMenu);
 		}
 	});
@@ -238,18 +241,18 @@ function loadResourcesSelect(){
 function  initSubMenu(menus){
 	var result = "";
 	if(menus.length>0){
-		for( i = 0; i < menus.length - 1; i++){
+		for( i = 0; i < menus.length; i++){
 			var menu = menus[i];
 			var pre = ""
 			/* for(j = 0;j<level;j++){
 				pre += "&nbsp;&nbsp;&nbsp;&nbsp;";
 			} */
-			result += ("<option value='"+menu.resourceId+"'> &nbsp;&nbsp;&nbsp;&nbsp;" + pre +menu.resourceName+" </option>");
-			if(menu.subResources != [] && menu.subResources != "" && menu.subResources != null && menu.subResources.length>0){
+			result += ("<option value='"+menu.id+"'> &nbsp;&nbsp;&nbsp;&nbsp;" + pre +menu.name+" </option>");
+			/* if(menu.subResources != [] && menu.subResources != "" && menu.subResources != null && menu.subResources.length>0){
 				level ++;
 				var subMenu =  "";//initSubMenu(menu.subResources);
 				result +=subMenu;
-			}
+			} */
 		}
 	}
 	level --;
@@ -280,14 +283,14 @@ function initGrid(){
 		dataType:"json",
 	    post: function (){
 	        return {
-	            id: "0"
+	            id: "1"
 	        };
 	    },
 	    url: "resource/list",
 	    formatters: {
 	        "commands": function(column, row) {
-	            return "<button type=\"button\" class=\"btn btn-xs btn-warning command-edit\" data-row-id=\"" + row.resourceId + "\"><i class=\"icon-pencil\"></i></button> " + 
-	                "<button type=\"button\" class=\"btn btn-xs btn-danger command-delete\" data-row-id=\"" + row.resourceId + "\"><i class=\"icon-remove\"></i> </button>";
+	            return "<button type=\"button\" class=\"btn btn-xs btn-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"icon-pencil\"></i></button> " + 
+	                "<button type=\"button\" class=\"btn btn-xs btn-danger command-delete\" data-row-id=\"" + row.id + "\"><i class=\"icon-remove\"></i> </button>";
 	        }
 	    },
 	    toolbar:"#toolBar"

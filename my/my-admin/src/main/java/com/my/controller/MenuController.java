@@ -31,7 +31,7 @@ public class MenuController {
 		result = new HashMap<String, Object>();
 		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		SysRoles role = (SysRoles) request.getSession().getAttribute(Constants.CURRENT_ROLE);
-		List<SysResource> nav = sysResourceService.findNavResourceByRoleId(role.getRoleId());
+		List<SysResource> nav = sysResourceService.findNavMenuByRoleId(role.getId());
 		result.put("menus", nav);
 		return result;
 	}

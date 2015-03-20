@@ -3,18 +3,30 @@
 <mapper namespace="SysResourceMapper">
 
 	<resultMap id="RoleResourceResultMap" type="org.my.core.sys.model.SysResource" extends="org.my.core.common.dao.SysResourcesMapper.BaseResultMap">
-		<result column="ROLE_ID" property="roleId" jdbcType="VARCHAR" />
-		<collection property="subResources" javaType="ArrayList" column="{resourceId=RESOURCE_ID,resourceType=RESOURCE_TYPE,roleId=ROLE_ID}" select="findSubResources" />
-		<collection property="styles" javaType="ArrayList" column="RESOURCE_ID" select="SysStyleMapper.findByResourceId" /> 
+		<result column="ROLE_ID" property="roleId" jdbcType="INTEGER" />
+		<association property="style" javaType="org.my.core.common.model.SysStyles" column="{id=STYLE_ID}" select="SysStyleMapper.findById"></association>
+		<collection property="children" javaType="ArrayList" column="{id=ID,type=TYPE,roleId=ROLE_ID}" select="findSubResources" />
 	</resultMap>
 
 	<resultMap id="AuthResourceResultMap" type="org.my.core.sys.model.SysResource" extends="org.my.core.common.dao.SysResourcesMapper.BaseResultMap">
-		<collection property="roles" javaType="ArrayList" column="RESOURCE_ID" select="SysRoleMapper.findByResourceId" />
+		<collection property="roles" javaType="ArrayList" column="ID" select="SysRoleMapper.findByResourceId" />
 	</resultMap>
-	
-	<resultMap id="NavResourceResultMap" type="org.my.core.sys.model.SysResource" extends="org.my.core.common.dao.SysResourcesMapper.BaseResultMap">
-		<collection property="subResources" javaType="ArrayList" column="{resourceId=RESOURCE_ID,resourceType=RESOURCE_TYPE}" select="findSubNavResources" />
+
+	<resultMap id="NavResultMap" type="org.my.core.sys.model.SysResource" extends="org.my.core.common.dao.SysResourcesMapper.BaseResultMap">
+		<collection property="children" javaType="ArrayList" column="{id=ID,type=TYPE}" select="findSubNav" />
 	</resultMap>
+
+	<resultMap id="BaseResultMap" type="org.my.core.sys.model.SysResource" extends="org.my.core.common.dao.SysResourcesMapper.BaseResultMap">
+		<association property="parent" javaType="org.my.core.common.model.SysResources" column="{id=PARENT_ID}" select="findById"></association>
+		<collection property="children" javaType="ArrayList" column="{id=ID,type=TYPE}" select="findSubNav" />
+	</resultMap>
+
+	<select id="findById" parameterType="HashMap" resultMap="org.my.core.common.dao.SysResourcesMapper.BaseResultMap">
+		select
+		<include refid="org.my.core.common.dao.SysResourcesMapper.Base_Column_List" />
+		from sys_resources
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
 
 	<select id="findAllAuth" resultMap="AuthResourceResultMap">
 		SELECT
@@ -23,56 +35,63 @@
 		sys_resources
 		<![CDATA[
 		WHERE
-		RESOURCE_PATH IS NOT NULL
+		URL IS NOT NULL
 		AND
-		RESOURCE_PATH <> '#'
+		URL <> '#'
 		]]>
 	</select>
-	
-	<select id="findByT" resultMap="AuthResourceResultMap" parameterType="org.my.core.sys.model.SysResource">
+
+	<select id="findByT" resultMap="BaseResultMap" parameterType="org.my.core.sys.model.SysResource">
 		SELECT
 		<include refid="org.my.core.common.dao.SysResourcesMapper.Base_Column_List" />
 		FROM
 		sys_resources
 		<where>
-		<if test="resourceType != null">
-			RESOURCE_TYPE = #{resourceType}
-		</if>
-		<if test="isSys != null">
-			IS_SYS = #{isSys}
-		</if>
+			<if test="type != null">
+				TYPE = #{type}
+			</if>
+			<if test="isSys != null">
+				IS_SYS = #{isSys}
+			</if>
 		</where>
 	</select>
-<!-- findNavResourceByRoleId start -->
-	<select id="findNavResourceByRoleId" resultMap="RoleResourceResultMap" parameterType="java.lang.String">
+
+	<select id="findPageByT" resultMap="BaseResultMap" parameterType="org.my.core.sys.model.SysResource">
 		SELECT
-		t1.RESOURCE_ID,
-		t1.RESOURCE_TYPE,
-		t1.RESOURCE_NAME,
-		t1.RESOURCE_DESC,
-		t1.RESOURCE_PATH,
-		t1.PRIORITY,
-		t1.ENABLED,
-		t1.IS_SYS,
-		t1.MODULE_ID,
-		t2.ROLE_ID
+		<include refid="org.my.core.common.dao.SysResourcesMapper.Base_Column_List" />
 		FROM
-		sys_resources t1,sys_roles t2
+		sys_resources
+		<where>
+			<if test="type != null">
+				TYPE = #{type}
+			</if>
+			<if test="isSys != null">
+				IS_SYS = #{isSys}
+			</if>
+		</where>
+	</select>
+	<!-- findNavResourceByRoleId start -->
+	<select id="findNavByRoleId" resultMap="RoleResourceResultMap" parameterType="java.lang.Integer">
+		SELECT
+		<include refid="org.my.core.common.dao.SysResourcesMapper.Base_Column_List" />
+		,
+		#{roleId} as ROLE_ID
+		FROM
+		sys_resources
 		WHERE
-		t1.RESOURCE_TYPE = '0'
+		TYPE = '0'
 		AND
-		t1.PRIORITY = 0
-		AND
-		t2.ROLE_ID = #{roleId}
+		LEVEL = 0
 	</select>
 
 	<select id="findSubResources" parameterType="HashMap" resultMap="RoleResourceResultMap">
 		SELECT
-		t1.RESOURCE_ID,
-		t1.RESOURCE_TYPE,
-		t1.RESOURCE_NAME,
-		t1.RESOURCE_DESC,
-		t1.RESOURCE_PATH,
+		t1.ID,
+		t1.TYPE,
+		t1.NAME,
+		t1.DESCRIPTION,
+		t1.STYLE_ID,
+		t1.URL,
 		t1.PRIORITY,
 		t1.ENABLED,
 		t1.IS_SYS,
@@ -83,54 +102,36 @@
 		JOIN
 		sys_roles_resources t2
 		ON
-		t1.RESOURCE_ID = t2.RESOURCE_ID
+		t1.ID = t2.RESOURCE_ID
 		WHERE
-		t1.PARENT_ID = #{resourceId}
+		t1.PARENT_ID = #{id}
 		AND
-		t1.RESOURCE_TYPE = #{resourceType}
-		<if test="roleId !=null">
+		t1.TYPE = #{type}
 		AND
 		t2.ROLE_ID = #{roleId}
-		</if>
 	</select>
-<!-- findNavResourceByRoleId end -->
+	<!-- findNavResourceByRoleId end -->
 <!-- findAllNav start -->
-	<select id="findAllNav" resultMap="NavResourceResultMap" parameterType="java.lang.String">
+	<select id="findAllNav" resultMap="NavResultMap" parameterType="java.lang.String">
 		SELECT
-		t1.RESOURCE_ID,
-		t1.RESOURCE_TYPE,
-		t1.RESOURCE_NAME,
-		t1.RESOURCE_DESC,
-		t1.RESOURCE_PATH,
-		t1.PRIORITY,
-		t1.ENABLED,
-		t1.IS_SYS,
-		t1.MODULE_ID
+		<include refid="org.my.core.common.dao.SysResourcesMapper.Base_Column_List" />
 		FROM
-		sys_resources t1
+		sys_resources
 		WHERE
-		t1.RESOURCE_TYPE = '0'
+		TYPE = '0'
 		AND
-		t1.PRIORITY = 0
+		LEVEL = 0
 	</select>
-	
-	<select id="findSubNavResources" parameterType="HashMap" resultMap="NavResourceResultMap">
+
+	<select id="findSubNav" parameterType="HashMap" resultMap="NavResultMap">
 		SELECT
-		t1.RESOURCE_ID,
-		t1.RESOURCE_TYPE,
-		t1.RESOURCE_NAME,
-		t1.RESOURCE_DESC,
-		t1.RESOURCE_PATH,
-		t1.PRIORITY,
-		t1.ENABLED,
-		t1.IS_SYS,
-		t1.MODULE_ID
+		<include refid="org.my.core.common.dao.SysResourcesMapper.Base_Column_List" />
 		FROM
-		sys_resources t1
+		sys_resources
 		WHERE
-		t1.PARENT_ID = #{resourceId}
+		PARENT_ID = #{id}
 		AND
-		t1.RESOURCE_TYPE = #{resourceType}
+		TYPE = #{type}
 	</select>
-<!-- findAllNav start -->
+	<!-- findAllNav start -->
 </mapper>

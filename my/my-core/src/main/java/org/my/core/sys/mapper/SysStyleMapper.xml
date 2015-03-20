@@ -4,7 +4,7 @@
 	
 	<select id="findByResourceId" parameterType="java.lang.String" resultMap="org.my.core.common.dao.SysStylesMapper.BaseResultMap">
 		SELECT
-		t1.STYLE_CLASS,t1.ICON_NAME
+		t1.css,t1.ICON_NAME
 		FROM
 		sys_styles t1
 		JOIN
@@ -15,4 +15,10 @@
 		t2.RESOURCE_ID = #{resourceId,jdbcType=VARCHAR}
 	</select>
 
+  <select id="findById" parameterType="HashMap" resultMap="org.my.core.common.dao.SysStylesMapper.BaseResultMap">
+    select 
+    <include refid="org.my.core.common.dao.SysStylesMapper.Base_Column_List" />
+    from sys_styles
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
 </mapper>

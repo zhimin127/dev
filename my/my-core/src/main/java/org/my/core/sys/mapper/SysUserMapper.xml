@@ -3,7 +3,7 @@
 <mapper namespace="SysUserMapper">
 	
 	<resultMap id="UserResultMap" type="org.my.core.sys.model.SysUser" extends="org.my.core.common.dao.SysUsersMapper.BaseResultMap">
-		<collection property="roles" javaType="ArrayList" column="USER_ID" select="SysRoleMapper.findByUserId" />
+		<collection property="roles" javaType="ArrayList" column="ID" select="SysRoleMapper.findByUserId" />
 	</resultMap>
 	
 	

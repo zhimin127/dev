@@ -3,7 +3,6 @@ package org.my.sys.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -70,7 +69,7 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	public void update(SysUsers user) {
-		if (user == null || user.getUserId() == null || user.getUsername() == null) {
+		if (user == null || user.getId() == null || user.getUsername() == null) {
 			return;
 		}
 		logger.info("================ " + user.getPassword());
@@ -88,7 +87,6 @@ public class SysUserServiceImpl implements SysUserService {
 
 	public void saveUserRole(String userId, String roleId) {
 		Map<String, String> record = new HashMap<String, String>();
-		record.put("id", UUID.randomUUID().toString());
 		record.put("roleId", roleId);
 		record.put("userId", userId);
 		sysUserDao.addUserRole(record);

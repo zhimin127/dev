@@ -3,7 +3,6 @@ package com.my.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
@@ -25,7 +24,7 @@ import com.github.pagehelper.PageInfo;
 
 @RestController
 @RequestMapping("resource")
-public class ResourceController {
+public class SysResourceController {
 
 	protected final Log logger = LogFactory.getLog(getClass());
 	@Autowired
@@ -63,8 +62,7 @@ public class ResourceController {
 		// Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		//SysRoles role = (SysRoles) request.getSession().getAttribute(Constants.CURRENT_ROLE);
 		boolean ok = true;
-		if(StringUtils.isBlank(resource.getResourceId())&&StringUtils.isNotBlank(resource.getResourceName())){
-			resource.setResourceId(UUID.randomUUID().toString());
+		if (resource.getId() <= 0 && StringUtils.isNotBlank(resource.getName())) {
 			sysResourceService.save(resource);
 		}else{
 			sysResourceService.update(resource);
@@ -74,7 +72,7 @@ public class ResourceController {
 	}
 
 	@RequestMapping(value = "info", method = RequestMethod.GET)
-	public Map<String, Object> info(Model model,@PathParam(value = "id") String id, HttpServletRequest request) {
+	public Map<String, Object> info(Model model,@PathParam(value = "id") Integer id, HttpServletRequest request) {
 		SysResources resource =  sysResourceService.getById(id);
 		result = new HashMap<String, Object>();
 		result.put("ok", true);
@@ -87,8 +85,8 @@ public class ResourceController {
 		result = new HashMap<String, Object>();
 		SysResource resource = new SysResource();
 		//resource.setIsSys("0");
-		List<SysResources> resources = sysResourceService.getPageByT(resource, pageNum, pageSize);
-		PageInfo<SysResources> pageView = new PageInfo<SysResources>(resources);
+		List<SysResource> resources = sysResourceService.findPageByT(resource, pageNum, pageSize);
+		PageInfo<SysResource> pageView = new PageInfo<SysResource>(resources);
 		pageView.setPageNum(pageNum);
 		result.put("ok", true);
 		result.put("current", pageView.getPageNum());

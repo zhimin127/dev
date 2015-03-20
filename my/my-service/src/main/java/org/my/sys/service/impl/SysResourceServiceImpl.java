@@ -13,6 +13,8 @@ import org.my.sys.service.SysResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+
 @Service("sysResourcesService")
 public class SysResourceServiceImpl implements SysResourceService {
 
@@ -38,13 +40,13 @@ public class SysResourceServiceImpl implements SysResourceService {
 		return sysResourceDao.findAllAuth();
 	}
 
-	public List<SysResource> findNavResourceByRoleId(String roleId) {
-		return sysResourceDao.findNavResourceByRoleId(roleId);
+	public List<SysResource> findNavMenuByRoleId(Integer roleId) {
+		return sysResourceDao.findNavMenuByRoleId(roleId);
 	}
 
-	public SysResources getByTypeAndResourceName(String resourceType, String resourceName) {
+	public SysResources getByTypeAndName(String resourceType, String resourceName) {
 		SysResourcesExample example = new SysResourcesExample();
-		example.createCriteria().andResourceTypeEqualTo(resourceType).andResourceNameEqualTo(resourceName);
+		example.createCriteria().andTypeEqualTo(resourceType).andNameEqualTo(resourceName);
 		List<SysResources> resources = sysResourcesMapper.selectByExample(example);
 		if (resources.size() > 0) {
 			return resources.get(0);
@@ -57,6 +59,7 @@ public class SysResourceServiceImpl implements SysResourceService {
 	}
 
 	public List<SysResource> findPageByT(SysResource resource, int page, int pageSize) {
+		PageHelper.startPage(page, pageSize).count(false).reasonable(true).pageSizeZero(false);
 		return sysResourceDao.findPageByT(resource, page, pageSize);
 	}
 
@@ -70,21 +73,15 @@ public class SysResourceServiceImpl implements SysResourceService {
 		if (StringUtils.isNotBlank(resource.getIsSys())) {
 			criteria.andIsSysEqualTo(resource.getIsSys());
 		}
-		if (StringUtils.isNotBlank(resource.getResourceType())) {
-			criteria.andIsSysEqualTo(resource.getResourceType());
+		if (StringUtils.isNotBlank(resource.getType())) {
+			criteria.andIsSysEqualTo(resource.getType());
 		}
 		List<SysResources> list = sysResourcesMapper.selectByExample(example);
-		for (SysResources res : list) {
-			if (StringUtils.isNotBlank(res.getParentId())) {
-				SysResources pres = sysResourcesMapper.selectByPrimaryKey(res.getParentId());
-				res.setParentId(pres.getResourceName());
-			}
-		}
 		return list;
 	}
 
 	@Override
-	public SysResources getById(String id) {
+	public SysResources getById(Integer id) {
 		return sysResourcesMapper.selectByPrimaryKey(id);
 	}
 

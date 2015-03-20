@@ -32,36 +32,43 @@ public class Junit_my_admin {
 		logger.info("junit:"+userService.login(null, null));
 	}
 
-	//@Autowired
+	@Autowired
 	private SysUserService sysUserService;
 	//@Test
 	public void getUser() {
-		SysUsers user = sysUserService.getByUsernameAndPassword("admin", "admin");
+		SysUsers user = null;
+		//user = sysUserService.getByUsernameAndPassword("admin", "admin");
 		user = sysUserService.findByUsername("admin");
+		user.setPassword("admin");
+		sysUserService.update(user);
+		user = sysUserService.getByUsernameAndPassword("admin", "admin");
 		logger.info(GsonUtil.toJson(user));
 	}
 
 	@Autowired
 	private SysResourceService sysResourceService;
 	@Test
-	public void getResources() {
+	public void findNav() {
 		//SysRoles role = sysRoleService.getRoleByName(baseRole[0]);
-		List<SysResource> nav = sysResourceService.findAllNavMenu();
-		
-		for(SysResource sub:nav.get(0).getSubResources()){
-			logger.info(sub.getResourceName()+":" +GsonUtil.toJson(sub.getSubResources()));
+		List<SysResource> nav = null;
+		nav = sysResourceService.findAllNavMenu();
+		//nav = sysResourceService.findNavMenuByRoleId(1);
+		//nav  = sysResourceService.findPageByT(null, 1, 10);
+		logger.error(nav.size());
+		for(SysResource res:nav.get(0).getChildren()){
+			//logger.info(GsonUtil.toJson(res));
+			logger.info(res.getName()+" : " +GsonUtil.toJson(res.getChildren()));
 		}
-		//List<SysResource> res = sysResourcesService.getPageByT(null, 0, 2);
-		//logger.info(GsonUtil.toJson(res));
+		//logger.info(GsonUtil.toJson(roleNav));
 	}
 	
 	//@Test
 	public void updateResources() {
-		String id ="75129c20-0647-47c9-b467-55be876aebc9";
+		Integer id =1;
 		SysResources resource = sysResourceService.getById(id );
-		resource.setResourceName("系统111");
-		sysResourceService.update(resource );
-		resource = sysResourceService.getById(id );
+		//resource.setName("系统111");
+		//sysResourceService.update(resource );
+		//resource = sysResourceService.getById(id );
 		logger.info(GsonUtil.toJson(resource));
 	}
 }

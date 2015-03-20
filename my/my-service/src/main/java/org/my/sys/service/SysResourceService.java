@@ -11,23 +11,23 @@ public interface SysResourceService {
 
 	void update(SysResources resource);
 
-	SysResources getById(String id);
+	SysResources getById(Integer id);
 	
 	List<SysResources> getAll();
 
-	List<SysResource> findAllAuth();
-
-	List<SysResource> findNavResourceByRoleId(String roleId);
-
-	SysResources getByTypeAndResourceName(String resourceType, String resourceName);
+	SysResources getByTypeAndName(String resourceType, String resourceName);
 
 	List<SysResources> getByT(SysResource resource);
 
 	List<SysResources> getPageByT(SysResource resource, int page, int pageSize);
+
+	List<SysResource> findAllAuth();
 	
 	List<SysResource> findByT(SysResource resource);
 	
 	List<SysResource> findPageByT(SysResource resource, int page, int pageSize);
 
 	List<SysResource> findAllNavMenu();
+
+	List<SysResource> findNavMenuByRoleId(Integer id);
 }
