@@ -22,7 +22,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = { "classpath:applicationContext.xml", "classpath:applicationContext-mvc.xml" })
 public class Junit_my_admin {
 	
-	protected final Log logger = LogFactory.getLog(getClass());
+	private final Log logger = LogFactory.getLog(getClass());
 	
 	//@Autowired
 	private UserService userService;
@@ -49,7 +49,7 @@ public class Junit_my_admin {
 		List<SysResource> nav = sysResourceService.findAllNavMenu();
 		
 		for(SysResource sub:nav.get(0).getSubResources()){
-			System.out.println(sub.getResourceName()+":" +GsonUtil.toJson(sub.getSubResources()));
+			logger.info(sub.getResourceName()+":" +GsonUtil.toJson(sub.getSubResources()));
 		}
 		//List<SysResource> res = sysResourcesService.getPageByT(null, 0, 2);
 		//logger.info(GsonUtil.toJson(res));

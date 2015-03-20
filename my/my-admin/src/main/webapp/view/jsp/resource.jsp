@@ -131,20 +131,20 @@
                      <form class="form-horizontal" role="form" action="resource/create" method="post" id="resouceForm">
                                 <input type="hidden"  name="resourceId" value="">
                                 <div class="form-group">
-                                  <label class="col-lg-4 control-label">名称</label>
+                                  <label class="col-lg-4 control-label">菜单名称</label>
                                   <div class="col-lg-8">
-                                    <input type="text" class="form-control" placeholder="名称" name="resourceName">
+                                    <input type="text" class="form-control" placeholder="菜单名称" name="resourceName">
                                   </div>
                                 </div>
                                 <div class="form-group">
-                                  <label class="col-lg-4 control-label">父资源</label>
+                                  <label class="col-lg-4 control-label">上级资源</label>
                                   <div class="col-lg-8">
-                                    <select class="form-control" name="parentId" id="parentId">
+                                    <select class="form-control select2-offscreen" name="parentId" id="parentId">
                                     </select>
                                   </div>
                                 </div>    
                                 <div class="form-group">
-                                  <label class="col-lg-4 control-label">类型</label>
+                                  <label class="col-lg-4 control-label">菜单类型</label>
                                   <div class="col-lg-8">
                                     <select class="form-control" name="resourceType" id="resourceType">
                                       <option value="0">菜单</option>
@@ -228,7 +228,7 @@ function loadResourcesSelect(){
 		//$(this).append("<option value=''>请选择</option>");
 		for(i=0;i<data.menus.length;i++){
 			var menu = data.menus[i];
-			$(this).append("<option value='"+menu.resourceId+"'> -- "+menu.resourceName+" -- </option>");
+			$(this).append("<option value='"+menu.resourceId+"'> ---- 顶层资源 ---- </option>");
 			level = 1;
 			var subMenu = initSubMenu(menu.subResources);
 			$(this).append(subMenu);
@@ -238,16 +238,16 @@ function loadResourcesSelect(){
 function  initSubMenu(menus){
 	var result = "";
 	if(menus.length>0){
-		for(i=0;i<menus.length-1;i++){
+		for( i = 0; i < menus.length - 1; i++){
 			var menu = menus[i];
 			var pre = ""
-			for(j = 0;j<level;j++){
+			/* for(j = 0;j<level;j++){
 				pre += "&nbsp;&nbsp;&nbsp;&nbsp;";
-			}
+			} */
 			result += ("<option value='"+menu.resourceId+"'> &nbsp;&nbsp;&nbsp;&nbsp;" + pre +menu.resourceName+" </option>");
 			if(menu.subResources != [] && menu.subResources != "" && menu.subResources != null && menu.subResources.length>0){
 				level ++;
-				var subMenu =  initSubMenu(menu.subResources);
+				var subMenu =  "";//initSubMenu(menu.subResources);
 				result +=subMenu;
 			}
 		}
