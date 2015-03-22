@@ -35,8 +35,8 @@
 	</mvc:freemarker-configurer>
 
 	<mvc:view-resolvers>
-		<mvc:freemarker cache-views="false" prefix="" suffix=".ftl" />
 		<mvc:jsp cache-views="false" prefix="/view/jsp/" suffix=".jsp" />
+		<mvc:freemarker cache-views="false" prefix="" suffix=".ftl" />
 	</mvc:view-resolvers>
 
 	<mvc:default-servlet-handler />

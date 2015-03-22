@@ -59,7 +59,7 @@ public class SysResourceServiceImpl implements SysResourceService {
 	}
 
 	public List<SysResource> findPageByT(SysResource resource, int page, int pageSize) {
-		PageHelper.startPage(page, pageSize).count(false).reasonable(true).pageSizeZero(false);
+		PageHelper.startPage(page, pageSize).count(true).reasonable(true).pageSizeZero(false);
 		return sysResourceDao.findPageByT(resource, page, pageSize);
 	}
 

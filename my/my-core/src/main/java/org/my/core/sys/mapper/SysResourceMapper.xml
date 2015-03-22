@@ -73,8 +73,7 @@
 	<!-- findNavResourceByRoleId start -->
 	<select id="findNavByRoleId" resultMap="RoleResourceResultMap" parameterType="java.lang.Integer">
 		SELECT
-		<include refid="org.my.core.common.dao.SysResourcesMapper.Base_Column_List" />
-		,
+		<include refid="org.my.core.common.dao.SysResourcesMapper.Base_Column_List" />,
 		#{roleId} as ROLE_ID
 		FROM
 		sys_resources
@@ -82,6 +81,7 @@
 		TYPE = '0'
 		AND
 		LEVEL = 0
+		ORDER BY PRIORITY
 	</select>
 
 	<select id="findSubResources" parameterType="HashMap" resultMap="RoleResourceResultMap">
@@ -109,6 +109,7 @@
 		t1.TYPE = #{type}
 		AND
 		t2.ROLE_ID = #{roleId}
+		ORDER BY PRIORITY
 	</select>
 	<!-- findNavResourceByRoleId end -->
 <!-- findAllNav start -->
@@ -121,6 +122,7 @@
 		TYPE = '0'
 		AND
 		LEVEL = 0
+		ORDER BY PRIORITY
 	</select>
 
 	<select id="findSubNav" parameterType="HashMap" resultMap="NavResultMap">
@@ -132,6 +134,7 @@
 		PARENT_ID = #{id}
 		AND
 		TYPE = #{type}
+		ORDER BY PRIORITY
 	</select>
 	<!-- findAllNav start -->
 </mapper>

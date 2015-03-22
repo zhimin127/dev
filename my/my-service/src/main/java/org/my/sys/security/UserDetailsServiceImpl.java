@@ -1,5 +1,8 @@
 package org.my.sys.security;
 
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.my.core.sys.model.SysUser;
@@ -26,6 +29,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private UserAssemblerRolesService userAssemblerRolesService;
 	@Autowired
 	private MessageSource messageSource;
+	@Autowired
+	private Cache myCache;
 
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		logger.info("============================== 1.用户 " + username + " ============================== ");
@@ -36,9 +41,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 				throw new UsernameNotFoundException("用户名不存在！");
 			}
 			user = userAssemblerRolesService.buildUserFromUserEntity(userAccount);
+			if (userAccount.getRoles().size() > 0) {
+				Element element = new Element(username, userAccount.getRoles().get(0));
+				myCache.put(element);
+			}
 		}
 		this.userCache.putUserInCache(user);
-		//logger.info(JSONUtil.toJson(user));
+		// logger.info(JSONUtil.toJson(user));
 		return user;
 	}
 

@@ -1,0 +1,29 @@
+
+.widget-content tr th{
+  border-top:  1px solid #ddd !important;
+}
+.bootgrid-header, .bootgrid-footer {
+  margin: 10px 0;
+}
+.bootgrid-header .toolBar {
+ 	float: left;
+}
+.bootgrid-footer .paginationBar{
+	text-align: right;
+}
+.bootgrid-footer .infoBar{
+	display: none;
+}
+.sidebar li.active{
+	background-color: #9999f9;
+}
+
+.sidebar #nav li ul li a:hover {
+	background-color: #9999f9;
+}
+.sidebar li.active a span{
+	color: #fff;
+}
+.sidebar li a:HOVER span{
+	color: #000;
+}

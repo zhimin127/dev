@@ -8,10 +8,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.my.app.service.UserService;
 import org.my.core.common.model.SysResources;
+import org.my.core.common.model.SysRoles;
 import org.my.core.common.model.SysUsers;
 import org.my.core.sys.model.SysResource;
 import org.my.core.util.GsonUtil;
 import org.my.sys.service.SysResourceService;
+import org.my.sys.service.SysRoleService;
 import org.my.sys.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -47,12 +49,12 @@ public class Junit_my_admin {
 
 	@Autowired
 	private SysResourceService sysResourceService;
-	@Test
+	//@Test
 	public void findNav() {
 		//SysRoles role = sysRoleService.getRoleByName(baseRole[0]);
 		List<SysResource> nav = null;
-		nav = sysResourceService.findAllNavMenu();
-		//nav = sysResourceService.findNavMenuByRoleId(1);
+		//nav = sysResourceService.findAllNavMenu();
+		nav = sysResourceService.findNavMenuByRoleId(1);
 		//nav  = sysResourceService.findPageByT(null, 1, 10);
 		logger.error(nav.size());
 		for(SysResource res:nav.get(0).getChildren()){
@@ -70,5 +72,15 @@ public class Junit_my_admin {
 		//sysResourceService.update(resource );
 		//resource = sysResourceService.getById(id );
 		logger.info(GsonUtil.toJson(resource));
+	}
+	
+	@Autowired
+	private SysRoleService sysRoleService;
+	@Test
+	public void roles(){
+		List<SysRoles> list = null;
+		//list = sysRoleService.getPageByT(null, 1, 10);
+		list = sysRoleService.getAll();
+		logger.info(GsonUtil.toJson(list));
 	}
 }

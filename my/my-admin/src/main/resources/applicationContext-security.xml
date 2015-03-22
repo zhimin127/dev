@@ -6,12 +6,11 @@
 	<debug />
 	<global-method-security pre-post-annotations="enabled" />
 	<!-- 该路径下的资源不用过滤 -->
-	<http pattern="/**/*.css" security="none" />
-	<http pattern="/**/*.jpg" security="none" />
+	<!-- <http pattern="/**/*.css" security="none" /> -->
+	<!-- <http pattern="/**/*.js" security="none" /> -->
+	<!-- <http pattern="/**/*.jpg" security="none" />
 	<http pattern="/**/*.gif" security="none" />
-	<http pattern="/**/*.png" security="none" />
-	<http pattern="/**/*.js" security="none" />
-	<http pattern="/static/**" security="none" />
+	<http pattern="/**/*.png" security="none" /> -->
 
 	<http use-expressions="true" auto-config="true">
 		<intercept-url pattern="/login.html" access="permitAll" />

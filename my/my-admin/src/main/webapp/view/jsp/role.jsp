@@ -6,14 +6,17 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="utf-8">
   <!-- Title and other stuffs -->
-  <title>资源管理</title> 
+  <title>角色管理</title> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   <meta name="author" content="">
   <%@include file="inc/css.html" %>
   <style>
-  .fade{
- 	
-  }
+.modal-wrapper{
+/* PLAY THE WITH THE VALUES TO SEE GET THE DESIRED EFFECT */
+}
+#authModal .widget{
+	margin: 0 0 0 0;
+}
   </style>
 </head>
 <body>
@@ -29,13 +32,13 @@
   	<div class="mainbar">
       <!-- Page heading -->
       <div class="page-head">
-        <h2 class="pull-left"><i class="icon-table"></i> 资源管理</h2>
+        <h2 class="pull-left"><i class="icon-table"></i> 角色管理</h2>
         <!-- Breadcrumb -->
         <div class="bread-crumb pull-right">
           <a href="index.html"><i class="icon-home"></i>首页</a> 
           <!-- Divider -->
           <span class="divider">/</span> 
-          <a href="#" class="bread-current">资源管理</a>
+          <a href="#" class="bread-current">角色管理</a>
         </div>
         <div class="clearfix"></div>
       </div>
@@ -51,11 +54,11 @@
                 <table id="grid-resources" class="table table-hover table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th data-column-id="id" data-type="numeric">ID</th>
+                            <th data-column-id="id" data-type="id">ID</th><!-- numeric -->
                             <th data-column-id="name">名称</th>
-                            <th data-column-id="url">链接</th>
-                            <th data-column-id="parentName"  data-order="desc">所属资源</th>
-                            <th data-column-id="priority">排序</th>
+                            <th data-column-id="mark"  data-order="desc">唯一标识</th>
+                            <th data-column-id="description">描述</th>
+                            <th data-column-id="enabled" data-formatter="enabled" >状态</th>
                             <th data-column-id="commands" data-formatter="commands" data-sortable="false">操作</th>
                         </tr>
                     </thead>
@@ -70,60 +73,47 @@
     </div>
    <!-- Mainbar ends -->	    	
    <div class="clearfix"></div>
+   <!-- 角色toolBar  -->
  <div class="pull-left" id="toolBar">
-       <button class="btn btn-default" data-target="#myModal"  data-toggle="modal" data-backdrop="static" ><!-- data-remote="resource/create" -->
-          <i class="icon-plus"></i> 添加资源
+       <button class="btn btn-default" data-target="#roleModal"  data-toggle="modal" data-backdrop="static" >
+          <i class="icon-plus"></i> 添加角色
       </button>
+       <button class="btn btn-default" data-target="#authModal"  data-toggle="modal" data-backdrop="static" data-remote="role/auth.html">
+          <i class="icon-list-alt"></i> 分配权限
+      </button>
+      <!-- <a href="role/auth.html" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#authModal">Launch Demo Modal</a> -->
 </div>
-   <!-- 模态框（Modal） -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
-   aria-labelledby="myModalLabel" aria-hidden="true">
+   <!-- 角色 模态框（Modal） -->
+<div class="modal fade modal-wrapper" id="roleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
    <div class="modal-dialog">
       <div class="modal-content">
          <div class="modal-header">
-            <button type="button" class="close"  data-dismiss="modal" aria-hidden="true">
-                  &times;
-            </button>
-            <h4 class="modal-title" id="myModalLabel">
-               添加资源
-            </h4>
+            <button type="button" class="close"  data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">添加角色</h4>
          </div>
          <div class="modal-body">
                     <!-- Form starts.  -->
                      <form class="form-horizontal" role="form" action="resource/create" method="post" id="resouceForm">
                      			<input type="hidden" name="id">
                                 <div class="form-group">
-                                  <label class="col-lg-4 control-label">菜单名称</label>
+                                  <label class="col-lg-4 control-label">角色名称</label>
                                   <div class="col-lg-8">
-                                    <input type="text" class="form-control" placeholder="菜单名称" name="name">
+                                    <input type="text" class="form-control" placeholder="角色名称" name="name">
                                   </div>
                                 </div>
                                 <div class="form-group">
-                                  <label class="col-lg-4 control-label">上级资源</label>
+                                  <label class="col-lg-4 control-label">唯一标识</label>
                                   <div class="col-lg-8">
-                                    <select class="form-control select2-offscreen" name="parentId" id="parentId">
+                                    <input type="text" class="form-control" placeholder="唯一标识" name="mark">
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label class="col-lg-4 control-label">角色状态</label>
+                                  <div class="col-lg-8">
+                                    <select class="form-control" name="enabled">
+                                      <option value="1">启用</option>
+                                      <option value="0">停用</option>
                                     </select>
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <label class="col-lg-4 control-label">排序</label>
-                                  <div class="col-lg-8">
-                                    <input type="text" class="form-control" placeholder="排序" name="priority">
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <label class="col-lg-4 control-label">菜单类型</label>
-                                  <div class="col-lg-8">
-                                    <select class="form-control" name="type" id="type">
-                                      <option value="0">菜单</option>
-                                      <option value="1">按钮</option>
-                                    </select>
-                                  </div>
-                                </div>     
-                                <div class="form-group">
-                                  <label class="col-lg-4 control-label">链接</label>
-                                  <div class="col-lg-8">
-                                    <input type="text" class="form-control" placeholder="链接" name="url">
                                   </div>
                                 </div>
                                 <div class="form-group">
@@ -136,11 +126,22 @@
          </div>
          <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            <button type="button" class="btn btn-primary submit" data-target="#myModal">提交更改</button>
+            <button type="button" class="btn btn-primary submit" data-target="#roleModal">提交更改</button>
          </div>
       </div><!-- /.modal-content -->
-</div><!-- /.modal --></div>
+</div><!-- /.modal -->
 </div>
+</div>
+   <!-- 角色 模态框（Modal） -->
+    <!-- Modal HTML -->
+    <div id="authModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Content will be loaded here from "remote.php" file -->
+            </div>
+        </div>
+    </div>
+    
 <!-- Content ends -->
   <%@include file="inc/footer.jsp" %>
 <!-- Scroll to top -->
@@ -148,47 +149,21 @@
   <%@include file="inc/js.html" %>
 <script>
 var menuPos = 1;
-var subMenuPos = 2;
+var subMenuPos = 1;
 var resourcesGrid = null;
 $(function(){
 	resourcesGrid = initGrid();
 	loadResourcesSelect();
-	$("#myModal").on("hidden.bs.modal", function() { 
-		//$(this).removeData("bs.modal");
+	$(".modal").on("hidden.bs.modal", function() { 
+		$(this).removeData("bs.modal");
 		$(this).find("form")[0].reset();
 	});
-	$('#myModal').on('show.bs.modal', function () {
-		var _self = $(this);
-		/* $(this).find('.modal-dialog').css({  
-	        'margin-top': function () { 
-	        	var _scrollHeight = $(document).scrollTop(), // 获取当前窗口距离页面顶部高度
-	        	_windowHeight = $(window).height(); // 获取当前窗口高度
-	            var _modalHeight = _self.height();  
-	        	//alert(_windowHeight +":"+ _modalHeight+";" + _scrollHeight);
-	        	_posTop =_scrollHeight;
-	            return _posTop;  
-	        }  
-	    }); */
-	})
 	$('.modal .submit').click(submit);
 });
 function info(id){
-		var form = $("#myModal").find("form");
-		form.form('load', "resource/info?id="+id);
-		/* $.ajax({
-			url: "resource/info?id="+id,
-			dataType:"json",
-			success:function(data){
-				if(data.ok){
-					var res = data.resource;
-					$("input[name='name']").val(res.name);
-					$("input[name='url']").val(res.url);
-					$("select[name='parentId']").val(res.parentId);
-					$("textarea[name='description']").val(res.description); 
-				}
-			}
-		}); */
-		$("#myModal").modal('show');
+		var form = $("#roleModal").find("form");
+		form.form('load', "role/info?id="+id);
+		$("#roleModal").modal('show');
 }
 var level = 0; 
 function loadResourcesSelect(){
@@ -232,7 +207,7 @@ function submit(){
 	var form = win.find("form");
 	$.ajax({
 		type: 'POST',
-		url: "resource/create",
+		url: "role/create",
 		dataType:"json",
 		data: form.serializeArray(),
 		success:function(data){
@@ -255,8 +230,11 @@ function initGrid(){
 	            id: "1"
 	        };
 	    },
-	    url: "resource/list",
+	    url: "role/list",
 	    formatters: {
+	    	"enabled":function(column,row){
+	    		return ['<span class="label label-danger">Banned</span>','<span class="label label-success">Active</span>'][row.enabled];
+	    	},
 	        "commands": function(column, row) {
 	            return "<button type=\"button\" class=\"btn btn-xs btn-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"icon-pencil\"></i></button> " + 
 	                "<button type=\"button\" class=\"btn btn-xs btn-danger command-delete\" data-row-id=\"" + row.id + "\"><i class=\"icon-remove\"></i> </button>";

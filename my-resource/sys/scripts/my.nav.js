@@ -41,7 +41,7 @@ function initMacSidebar(){
 				}
 				var _class = '';
 				if(typeof menuPos != 'undefined' && i == menuPos){
-					_class = ' class="open"'
+					_class = ' class="open subdrop"'
 				}
 				menu += '<a href="' + url + '"'+_class+'>';
 				var icon = n.style.iconCss;
@@ -59,7 +59,12 @@ function initMacSidebar(){
 					subMenu += '<ul>'
 				}
 				jQuery.each(n.children, function(j, o) {
-					subMenu += '<li><a ref="' + o.id + '" href="' + o.url.substring(1) + '" rel="" ><span class="">' + o.name + '</span></a></li>';
+					if(typeof subMenuPos != 'undefined' && j == subMenuPos){
+						subMenu += '<li class="active">';
+					}else{
+						subMenu += '<li>';
+					}
+					subMenu += '<a ref="' + o.id + '" href="' + o.url.substring(1) + '" rel="" ><span class="">' + o.name + '</span></a></li>';
 				})
 				subMenu += '</ul>';
 			}
